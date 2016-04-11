@@ -3,17 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.snmill.cp</groupId>
-        <artifactId>CompetitiveProgramming</artifactId>
+        <artifactId>Algorithms</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>Algorithms</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>SimpleArraySum</module>
-        <module>VeryBigSum</module>
-        <module>DiagonalDifference</module>
-        <module>PlusMinus</module>
-        <module>Staircase</module>
-        <module>TimeConversion</module>
-    </modules>
+    <artifactId>TimeConversion</artifactId>
+    <packaging>jar</packaging>
 </project>

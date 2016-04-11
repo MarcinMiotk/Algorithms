@@ -51,17 +51,19 @@ public class Solution {
 
         @Override
         public int[] createMatrix(InputStream is) {
-            Scanner in = new Scanner(is);
-            int count = in.nextInt();
-            int matrix[] = new int[count * count];
-            int col = 0;
-            int row = 0;
-            while (in.hasNextInt()) {
-                matrix[row * count + col] = in.nextInt();
-                col++;
-                if (col == count) {
-                    row++;
-                    col = 0;
+            int[] matrix;
+            try (Scanner in = new Scanner(is)) {
+                int count = in.nextInt();
+                matrix = new int[count * count];
+                int col = 0;
+                int row = 0;
+                while (in.hasNextInt()) {
+                    matrix[row * count + col] = in.nextInt();
+                    col++;
+                    if (col == count) {
+                        row++;
+                        col = 0;
+                    }
                 }
             }
             return matrix;
