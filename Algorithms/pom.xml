@@ -15,5 +15,6 @@
         <module>PlusMinus</module>
         <module>Staircase</module>
         <module>TimeConversion</module>
+        <module>Codility</module>
     </modules>
 </project>

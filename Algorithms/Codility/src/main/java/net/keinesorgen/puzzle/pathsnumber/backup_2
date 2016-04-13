@@ -1,0 +1,239 @@
+package net.keinesorgen.puzzle.pathsnumber;
+
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Stack;
+
+/**
+ *
+ */
+public class Solution {
+
+    enum Direction {
+
+        RIGHT {
+                    @Override
+                    Position move(Position from) {
+                        return new Position(from.x + 1, from.y);
+                    }
+
+                },
+        DOWN {
+                    @Override
+                    Position move(Position from) {
+                        return new Position(from.x, from.y + 1);
+                    }
+                };
+
+        abstract Position move(Position from);
+    }
+
+    private static class Position {
+
+        public Position(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        final int x;
+        final int y;
+
+        Position move(Direction where) {
+            return where.move(this);
+        }
+    }
+
+    private static class Board {
+
+        final int[][] surface;
+        final int rows;
+        final int columns;
+
+        public Board(int[][] surface, int rows, int columns) {
+            this.surface = surface;
+            this.rows = rows;
+            this.columns = columns;
+        }
+
+        boolean inside(Position candidate) {
+            return candidate.x >= 0 && candidate.x < columns && candidate.y >= 0 && candidate.y < rows;
+        }
+
+        boolean canMove(Position candidate) {
+            return inside(candidate) && surface[candidate.y][candidate.x] == 1;
+        }
+
+        boolean isSuccess(Position candidate) {
+            return (candidate.x == columns - 1) && (candidate.y == rows - 1);
+        }
+    }
+
+    interface Radio {
+
+        void onResignFrom(Position toAnalyse);
+    }
+
+    private static class Scout {
+
+        private final Board board;
+        private final Radio radio;
+
+        public Scout(Board board, Radio radio) {
+            this.board = board;
+            this.radio = radio;
+        }
+
+        private Boolean makeDecision(Stack<Position> possibilities) throws Exception {
+            Position myDecision = possibilities.pop();
+            while (!possibilities.isEmpty()) {
+                radio.onResignFrom(possibilities.pop());
+            }
+            return walk(myDecision);
+        }
+
+        private Boolean walk(Position current) throws Exception {
+            Boolean reached = Boolean.FALSE;
+
+            Stack<Position> possibilities = new Stack<>();
+
+            for (Direction candidate : Direction.values()) {
+                Position next = candidate.move(current);
+                if (board.canMove(next)) {
+                    if (board.isSuccess(next)) {
+                        reached = Boolean.TRUE;
+                        break;
+                    } else {
+                        possibilities.push(next);
+                    }
+                }
+            }
+
+            if (!reached) {
+                if (possibilities.isEmpty()) {
+                    reached = Boolean.FALSE;
+                } else {
+                    return makeDecision(possibilities);
+                }
+            }
+
+            return reached;
+        }
+    }
+
+    static class RadioImpl implements Radio {
+
+        final java.util.concurrent.ExecutorService scouts;
+        final Board board;
+        final Stack<java.util.concurrent.Future<Boolean>> reports = new Stack<>();
+
+        RadioImpl(java.util.concurrent.ExecutorService scouts, Board board) {
+            this.scouts = scouts;
+            this.board = board;
+        }
+
+        @Override
+        public void onResignFrom(Position toAnalyse) {
+            reports.push(scouts.submit(new Scout(toAnalyse, board, this)));
+        }
+
+        class ReportsIterator implements Iterator<Boolean> {
+
+            final Stack<java.util.concurrent.Future<Boolean>> reports;
+
+            ReportsIterator(Stack<java.util.concurrent.Future<Boolean>> reports) {
+                this.reports = reports;
+            }
+
+            @Override
+            public boolean hasNext() {
+                return !reports.isEmpty();
+            }
+
+            @Override
+            public Boolean next() {
+                try {
+                    return reports.pop().get();
+                } catch (InterruptedException | java.util.concurrent.ExecutionException ex) {
+                    throw new ReportNotReachableException(ex);
+                }
+            }
+
+            @Override
+            public void remove() {
+                // nothing
+            }
+
+        }
+
+        Iterable<Boolean> reportsIterator() {
+            return new Iterable<Boolean>() {
+
+                @Override
+                public Iterator<Boolean> iterator() {
+                    return new ReportsIterator(reports);
+                }
+            };
+        }
+
+        void startRunning(Position begin) {
+            reports.push(scouts.submit(new Scout(begin, board, this)));
+        }
+    }
+
+    static class ReportNotReachableException extends RuntimeException {
+
+        public ReportNotReachableException(Throwable cause) {
+            super(cause);
+        }
+    };
+
+    static int numberOfPaths(int[][] a, int M, int N) {
+        Position start = new Position(0, 0);
+        Board board = new Board(a, M, N);
+        java.util.concurrent.ExecutorService scouts = java.util.concurrent.Executors.newCachedThreadPool();
+        //java.util.concurrent.ExecutorService scouts = java.util.concurrent.Executors.newFixedThreadPool(10);
+
+        RadioImpl radio = new RadioImpl(scouts, board);
+        radio.startRunning(start);
+
+        int success = 0;
+        int failures = 0;
+        for (Boolean item : radio.reportsIterator()) {
+            if (item) {
+                success++;
+            } else {
+                failures++;
+            }
+        }
+//
+//        System.out.println("succ=" + success);
+//        System.out.println("fail=" + failures);
+
+        return success;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int _a_cnt = 0, _b_cnt = 0;
+        int[][] _a = new int[1000][100];
+        try {
+            _a_cnt = sc.nextInt();
+            _b_cnt = sc.nextInt();
+        } catch (Exception e) {
+            System.out.println("Here: " + e.getMessage());
+        }
+
+        for (int i = 0; i < _a_cnt; i++) {
+            for (int j = 0; j < _b_cnt; j++) {
+                int _a_tmp = 0;
+                try {
+                    _a_tmp = sc.nextInt();
+                } catch (Exception e) {
+                }
+                _a[i][j] = _a_tmp;
+            }
+
+        }
+        System.out.println(numberOfPaths(_a, _b_cnt, _b_cnt));
+    }
+}
