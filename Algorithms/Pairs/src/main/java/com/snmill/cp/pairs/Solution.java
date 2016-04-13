@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * 21:36
+ *
  */
 public class Solution {
 
@@ -73,6 +73,22 @@ public class Solution {
 //            long[] deltas = computeDeltas(input);
 //            return countK(deltas, k);
             return countBasedOnStack(input, k);
+            //return countBasedOnComplexityOpow2(input, k);
+        }
+
+        int countBasedOnComplexityOpow2(int[] input, int k) {
+            int count = 0;
+
+            for (int i = 0; i < input.length; i++) {
+                for (int j = i; j < input.length; j++) {
+                    int difference = Math.abs(input[i] - input[j]);
+                    if (difference == k) {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
         }
 
         int countBasedOnStack(int[] input, int k) {
@@ -93,8 +109,7 @@ public class Solution {
                     if (difference == k) {
                         counter++;
                         stack.push(lower);
-                        stack.addAll(backup);
-                        backup.clear();
+                        copySecondStackIntoFirstAndThenClearSecond(stack, backup);
                         break;
                     } else if (difference < k) {
                         backup.push(lower);
@@ -102,16 +117,21 @@ public class Solution {
                         // difference>k
                         // nie ma sensu dalej sprawdzac
                         stack.push(lower);
-                        stack.addAll(backup);
-                        backup.clear();
+                        copySecondStackIntoFirstAndThenClearSecond(stack, backup);
                         break;
                     }
                 }
-
             }
 
             //
             return counter;
+        }
+
+        void copySecondStackIntoFirstAndThenClearSecond(Stack first, Stack second) {
+            while (!second.isEmpty()) {
+                first.push(second.pop());
+            }
+            second.clear();
         }
 
         int countK(long[] deltas, int k) {

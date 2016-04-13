@@ -3,6 +3,7 @@ package com.snmill.cp.pairs;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Stack;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +45,19 @@ public class SolutionTest {
 
         Solution.main(null);
         assertEquals("3", outContent.toString().trim());
+    }
+
+    @Test
+    public void kDifference_0() {
+        String input = ""
+                + "10 1\n"
+                + "363374326 364147530 61825163 1073065718 1281246024 1399469912 428047635 491595254 879792181 1069262793";
+
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Solution.main(null);
+        assertEquals("0", outContent.toString().trim());
     }
 
     @Test
@@ -222,5 +236,72 @@ public class SolutionTest {
         }
         int count = counter.countPairsOfIntegersWhoseDifferenceIsK(input, 3);
         assertEquals(99999, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_1_result_4() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 1);
+        assertEquals(4, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_2_result_4() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 2);
+        assertEquals(4, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_3_result_4() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 3);
+        assertEquals(4, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_4_result_2() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 4);
+        assertEquals(2, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_5_result_3() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 5);
+        assertEquals(3, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_6_result_2() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 6);
+        assertEquals(2, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_7_result_1() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 7);
+        assertEquals(1, count);
+    }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_8_result_1() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{2, 6, 7, 9, 3, 1, 4}, 8);
+        assertEquals(1, count);
+    }
+
+    @Test
+    public void copySecondStackIntoFirstAndThenClearSecond() {
+        Stack<Integer> a = new Stack<>();
+        Stack<Integer> b = new Stack<>();
+        a.push(1);
+        a.push(2);
+        a.push(3);
+        b.push(11);
+        b.push(10);
+        counter.copySecondStackIntoFirstAndThenClearSecond(a, b);
+        assertEquals(0, b.size());
+        assertEquals(5, a.size());
+        assertEquals(1, (int) a.get(0));
+        assertEquals(2, (int) a.get(1));
+        assertEquals(3, (int) a.get(2));
+        assertEquals(10, (int) a.get(3));
+        assertEquals(11, (int) a.get(4));
     }
 }
