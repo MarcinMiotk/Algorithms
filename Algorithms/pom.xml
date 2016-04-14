@@ -16,5 +16,6 @@
         <module>Staircase</module>
         <module>TimeConversion</module>
         <module>Codility</module>
+        <module>Pairs</module>
     </modules>
 </project>
