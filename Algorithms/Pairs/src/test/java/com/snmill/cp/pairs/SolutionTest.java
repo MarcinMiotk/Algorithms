@@ -304,4 +304,28 @@ public class SolutionTest {
         assertEquals(10, (int) a.get(3));
         assertEquals(11, (int) a.get(4));
     }
+
+    @Test
+    public void countPairsOfIntegersWhoseDifferenceIsK_k_3_result_is_4() {
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(new int[]{1, 2, 3, 4, 5, 6, 101, 102, 120, 124, 134, 137, 144, 142}, 3);
+        assertEquals(4, count);
+    }
+
+    @Test
+    public void longTable_k_1_result_27996() {
+        int n = 100000;
+        int[] input = new int[n];
+
+        int[] SPREAD = new int[]{1, 1, 3, 1, 5, 1, 3, 7, 9, 3, 5, 11, 17, 3, 3, 3, 1, 7, 7, 9, 1, 1, 7, 7, 5};
+        int spreadIterator = 0;
+
+        int valueToSet = 100000;
+        for (int i = 0; i < n; i++) {
+            input[i] = valueToSet;
+            valueToSet += SPREAD[spreadIterator % SPREAD.length];
+            spreadIterator++;
+        }
+        int count = counter.countPairsOfIntegersWhoseDifferenceIsK(input, 50);
+        assertEquals(27996, count);
+    }
 }
