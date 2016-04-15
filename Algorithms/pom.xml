@@ -17,5 +17,6 @@
         <module>TimeConversion</module>
         <module>Codility</module>
         <module>Pairs</module>
+        <module>AngryProfessor</module>
     </modules>
 </project>
