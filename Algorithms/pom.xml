@@ -20,5 +20,6 @@
         <module>AngryProfessor</module>
         <module>LonelyInteger</module>
         <module>SortingIntro</module>
+        <module>MaximumSubarray</module>
     </modules>
 </project>
