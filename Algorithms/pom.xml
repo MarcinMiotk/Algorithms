@@ -18,5 +18,7 @@
         <module>Codility</module>
         <module>Pairs</module>
         <module>AngryProfessor</module>
+        <module>LonelyInteger</module>
+        <module>SortingIntro</module>
     </modules>
 </project>
