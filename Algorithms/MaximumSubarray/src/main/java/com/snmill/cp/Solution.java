@@ -63,7 +63,11 @@ public class Solution {
                 if (candidateSum > sum) {
                     sum = candidateSum;
                 }
-                place.nextSlice();
+//                if (candidateSum < sum) {
+//                    place.onLowerSumThanLastMax();
+//                } else {
+                    place.nextSlice();
+//                }
             }
             return sum;
         }
@@ -97,6 +101,11 @@ public class Solution {
                     yIndex = y;
                 }
             }
+
+//            private void onLowerSumThanLastMax() {
+//                xIndex++;
+//                yIndex = y;
+//            }
         }
 
         int findMaxNonContiguousSum() {
