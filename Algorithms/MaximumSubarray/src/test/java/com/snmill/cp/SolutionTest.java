@@ -54,6 +54,20 @@ public class SolutionTest {
     }
 
     @Test
+    public void official_4_elements() {
+        FindMaxSum solution = new FindMaxSum(new int[]{1, 2, 3, 4});
+        int maxSum = solution.findMaxContiguousSum();
+        assertEquals(10, maxSum);
+    }
+
+    @Test
+    public void official_6_elements() {
+        FindMaxSum solution = new FindMaxSum(new int[]{2, -1, 2, 3, 4, -5});
+        int maxSum = solution.findMaxContiguousSum();
+        assertEquals(10, maxSum);
+    }
+
+    @Test
     public void official_test2() {
         String input = ""
                 + "6\n"

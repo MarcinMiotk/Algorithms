@@ -38,7 +38,6 @@ public class Solution {
         public String toString() {
             return maxContiguousSum + " " + maxNoncontiguousSum;
         }
-
     }
 
     static class FindMaxSum {
@@ -50,62 +49,38 @@ public class Solution {
         }
 
         int findMaxContiguousSum() {
-
             if (input.length == 1) {
                 return input[0];
             }
 
             int[] prefixes = PrefixSums.sums(input);
-            Place place = new Place(0, input.length - 1);
-            int sum = PrefixSums.countTotal(prefixes, place.xIndex, place.yIndex);
-            while (place.hasNextSlicesToCheck()) {
-                int candidateSum = PrefixSums.countTotal(prefixes, place.xIndex, place.yIndex);
-                if (candidateSum > sum) {
-                    sum = candidateSum;
+
+            int maxY = input.length - 1;
+
+            int maxSum = Integer.MIN_VALUE;
+
+            for (int x = 0; x < input.length; x++) {
+                int y = findBestY(prefixes, x, maxY);
+                int suggestion = PrefixSums.countTotal(prefixes, x, y);
+                if (suggestion > maxSum) {
+                    maxSum = suggestion;
                 }
-//                if (candidateSum < sum) {
-//                    place.onLowerSumThanLastMax();
-//                } else {
-                    place.nextSlice();
-//                }
             }
-            return sum;
+
+            return maxSum;
         }
 
-        static class Place {
-
-            final int x;
-            final int y;
-            int xIndex;
-            int yIndex;
-
-            public Place(int x, int y) {
-                this.x = x;
-                this.y = y;
-                xIndex = x;
-                yIndex = y;
-            }
-
-            boolean hasNextSlicesToCheck() {
-                if (xIndex <= y) {
-                    return true;
-                } else {
-                    return false;
+        int findBestY(int[] prefixes, int x, int maxY) {
+            int bestY = x;
+            int bestSum = PrefixSums.countTotal(prefixes, x, bestY);
+            for (int y = x; y <= maxY; y++) {
+                int candidateSum = PrefixSums.countTotal(prefixes, x, y);
+                if (candidateSum > bestSum) {
+                    bestSum = candidateSum;
+                    bestY = y;
                 }
             }
-
-            void nextSlice() {
-                yIndex--;
-                if (yIndex < xIndex) {
-                    xIndex++;
-                    yIndex = y;
-                }
-            }
-
-//            private void onLowerSumThanLastMax() {
-//                xIndex++;
-//                yIndex = y;
-//            }
+            return bestY;
         }
 
         int findMaxNonContiguousSum() {
