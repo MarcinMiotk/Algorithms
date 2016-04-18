@@ -67,6 +67,13 @@ public class SolutionTest {
         assertEquals(10, maxSum);
     }
 
+    //@Test
+    public void recorrency_bestY_is_4() {
+        FindMaxSum solution = new FindMaxSum(new int[]{});
+        int bestY = solution.findBestY_recurrency(new int[]{0, 2, 1, 3, 6, 10, 5}, 0, 5);
+        assertEquals(4, bestY);
+    }
+
     @Test
     public void official_test2() {
         String input = ""

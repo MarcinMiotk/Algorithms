@@ -48,6 +48,25 @@ public class Solution {
             this.input = input;
         }
 
+        int findMaxContiguousSum_faster() {
+            int sum = 0;
+            int maxValue = Integer.MIN_VALUE;
+            for (int x : input) {
+
+                sum += x;
+
+                if (sum > maxValue) {
+                    maxValue = sum;
+                }
+
+                if (sum < 0) {
+                    sum = 0;
+                }
+
+            }
+            return maxValue;
+        }
+
         int findMaxContiguousSum() {
             if (input.length == 1) {
                 return input[0];
@@ -61,6 +80,7 @@ public class Solution {
 
             for (int x = 0; x < input.length; x++) {
                 int y = findBestY(prefixes, x, maxY);
+                //int y = findBestY_recurrency(prefixes, x, maxY);
                 int suggestion = PrefixSums.countTotal(prefixes, x, y);
                 if (suggestion > maxSum) {
                     maxSum = suggestion;
@@ -68,6 +88,36 @@ public class Solution {
             }
 
             return maxSum;
+        }
+
+        int findBestY_recurrency(int[] prefixes, int x, int maxY) {
+            return findBestY_recurrency(prefixes, x, x, maxY);
+        }
+
+        int findBestY_recurrency(int[] prefixes, int x, int yMin, int yMax) {
+            int half = (yMax - yMin) / 2;
+            if (yMin == yMax) {
+                return yMin;
+            }
+            if (yMin == yMax - 1) {
+                int left = PrefixSums.countTotal(prefixes, x, yMin);
+                int right = PrefixSums.countTotal(prefixes, x, yMax);
+                if (left > right) {
+                    return yMin;
+                }
+                if (right >= left) {
+                    return yMax;
+                }
+            }
+            int left = PrefixSums.countTotal(prefixes, x, yMin + half);
+            int right = PrefixSums.countTotal(prefixes, x, yMax);
+            if (left > right) {
+                return findBestY_recurrency(prefixes, x, yMin, yMin + half);
+            } else if (right > left) {
+                return findBestY_recurrency(prefixes, x, yMin + half, yMax);
+            } else {
+                return findBestY_recurrency(prefixes, x, yMin + half, yMax);
+            }
         }
 
         int findBestY(int[] prefixes, int x, int maxY) {
@@ -104,7 +154,7 @@ public class Solution {
         Result findMaxSums() {
             Result result = new Result();
             result.maxNoncontiguousSum = findMaxNonContiguousSum();
-            result.maxContiguousSum = findMaxContiguousSum();
+            result.maxContiguousSum = findMaxContiguousSum_faster();
             return result;
         }
     }
