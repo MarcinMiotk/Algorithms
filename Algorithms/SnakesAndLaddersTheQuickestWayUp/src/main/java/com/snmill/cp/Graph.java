@@ -1,6 +1,7 @@
 package com.snmill.cp;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,7 +71,11 @@ public class Graph {
                 t.edges.set(seq, vTo);
             });
         });
-        
+
         vFrom.edges.clear();
+    }
+
+    public Iterator<Vertex> all() {
+        return vertexes.iterator();
     }
 }
