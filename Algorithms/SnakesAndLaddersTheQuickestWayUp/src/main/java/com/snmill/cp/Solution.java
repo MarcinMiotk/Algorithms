@@ -1,5 +1,6 @@
 package com.snmill.cp;
 
+import com.snmill.cp.BreadthFirstSearch.Visit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,10 +30,10 @@ public class Solution {
             }
             Game game = new Game(snakesList, laddersList);
             int movesToReachTargetSquare = game.movesToReachTargetSquare();
-            //System.out.println(movesToReachTargetSquare);
+            System.out.println(movesToReachTargetSquare);
         }
-        System.out.println("3");
-        System.out.println("5");
+        //     System.out.println("3");
+        //      System.out.println("5");
     }
 
     static class Creature {
@@ -67,14 +68,50 @@ public class Solution {
 
         final List<Snake> snakes;
         final List<Ladder> ladders;
+        Graph graph = new Graph();
 
         public Game(List<Snake> snakes, List<Ladder> ladders) {
             this.snakes = snakes;
             this.ladders = ladders;
+            create100vertexes();
+            link100VertexesWithDices();
         }
 
         int movesToReachTargetSquare() {
-            return 0;
+            for (Snake snake : snakes) {
+                graph.addLadderOrSnake(snake.starting, snake.ending);
+            }
+            for (Ladder ladder : ladders) {
+                graph.addLadderOrSnake(ladder.starting, ladder.ending);
+            }
+
+            BreadthFirstSearch bfs = new BreadthFirstSearch();
+            Visit visit = bfs.BreadthFirstSearch(graph, 100);
+            if (visit != null) {
+                return visit.distance;
+            } else {
+                return -1;
+            }
+        }
+
+        private void create100vertexes() {
+            for (int v = 1; v <= 100; v++) {
+                graph.createVertex(v);
+            }
+        }
+
+        private void link100VertexesWithDices() {
+            // there are 6 dices at the roll (1,2,3,4,5,6)
+            for (int v = 1; v <= 100; v++) {
+                for (int dice = 1; dice <= 6; dice++) {
+                    int toVertex = v + dice;
+                    if (toVertex <= 100) {
+                        graph.edge(v, toVertex, dice);
+                    } else {
+                        graph.edge(v, v, dice);
+                    }
+                }
+            }
         }
 
     }
