@@ -21,5 +21,6 @@
         <module>LonelyInteger</module>
         <module>SortingIntro</module>
         <module>MaximumSubarray</module>
+        <module>SnakesAndLaddersTheQuickestWayUp</module>
     </modules>
 </project>
