@@ -19,6 +19,12 @@ public class Solution {
     }
 
     static int countTheNumberOfSquareIntegersBetween(int a, int b) {
+        double minIndex = Math.ceil(Math.sqrt(a));
+        double maxIndex = Math.floor(Math.sqrt(b));
+        return (int) (maxIndex - minIndex) + 1;
+    }
+
+    static int countTheNumberOfSquareIntegersBetween_notSoGood(int a, int b) {
         int minIndex = (int) Math.ceil(Math.sqrt(a));
         int maxIndex = (int) Math.floor(Math.sqrt(b));
         int count = 0;
