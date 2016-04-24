@@ -22,5 +22,9 @@
         <module>SortingIntro</module>
         <module>MaximumSubarray</module>
         <module>SnakesAndLaddersTheQuickestWayUp</module>
+        <module>CaesarCipher</module>
+        <module>UtopianTree</module>
+        <module>FindDigits</module>
+        <module>CavityMap</module>
     </modules>
 </project>
