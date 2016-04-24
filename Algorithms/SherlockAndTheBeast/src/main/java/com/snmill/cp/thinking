@@ -1,0 +1,63 @@
+Dla N=5
+
+Testujemy
+
+5*5 = 5
+55555
+
+Czy 5 jest podzielne przez 3? NIE
+Czy 4 jest podzielne przez 3? NIe
+Czy 3 jest podzielne przez 3? TAK
+
+555XX
+
+Teraz dla 3
+Czy 2 jest podzielne przez 5? NIE
+
+Powrot do analizy 5
+Czy 2 jest podzielne przez 3? NIE i dalej nie ma sensu liczyc bo 2<3
+
+
+Więc dajemy testujemy strategie samych 3 i patrzymy ile jest podzielnych przez 5
+
+Czy 5 jest podzielne przez 5?   TAK
+Czy zero jest podzielne przez 3? TAK
+
+
+
+======================
+3           =   555
+
+======================
+11 / 3 = 3
+11 % 3 = 2
+
+======================
+
+
+Dla 8
+
+
+Find first 
+8%3 = 2 => 6 piątek lub 3 piąteki lub 0 piątek
+8%5 = 1 => 5 trójek lub 0 trójek
+
+Powstaną dwie tabele
+
+[6,3,0]
+[5,0]
+
+Szukam takiej a1 i b1, ze a1+b2=8
+
+Poniewaz nie chce robic dwóch tabel, to biorę wzrór
+
+a=0
+
+down(6, 3, a) = 6*2 = 6-3*0 = 6
+                       6-3*1 = 3
+                       6-3*2 = 0
+
+
+b= 1 --
+up(5, 5, b) = 5-5*1 = 0
+              5-5*0 = 5
