@@ -26,5 +26,7 @@
         <module>UtopianTree</module>
         <module>FindDigits</module>
         <module>CavityMap</module>
+        <module>ChocolateFeast</module>
+        <module>SherlockAndTheBeast</module>
     </modules>
 </project>
