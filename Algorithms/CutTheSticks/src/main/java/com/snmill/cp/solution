@@ -1,0 +1,2 @@
+1. Posortować listę.
+2. Każemu elementowi tablicy odjąć wartość pierwszego cięcia. Jeżeli element = 0, to go usuwam z listy.
