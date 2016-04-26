@@ -30,5 +30,6 @@
         <module>SherlockAndTheBeast</module>
         <module>SherlockAndSquares</module>
         <module>ServiceLane</module>
+        <module>CutTheSticks</module>
     </modules>
 </project>
