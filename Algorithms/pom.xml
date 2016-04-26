@@ -28,5 +28,7 @@
         <module>CavityMap</module>
         <module>ChocolateFeast</module>
         <module>SherlockAndTheBeast</module>
+        <module>SherlockAndSquares</module>
+        <module>ServiceLane</module>
     </modules>
 </project>
