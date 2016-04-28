@@ -31,5 +31,6 @@
         <module>SherlockAndSquares</module>
         <module>ServiceLane</module>
         <module>CutTheSticks</module>
+        <module>LisasWorkbook</module>
     </modules>
 </project>
