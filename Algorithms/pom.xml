@@ -32,5 +32,9 @@
         <module>ServiceLane</module>
         <module>CutTheSticks</module>
         <module>LisasWorkbook</module>
+        <module>LibraryFine</module>
+        <module>ManasaAndStones</module>
+        <module>ACM_ICPC_Team</module>
+        <module>ModifiedKaprekarNumbers</module>
     </modules>
 </project>
