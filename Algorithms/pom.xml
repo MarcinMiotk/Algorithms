@@ -36,5 +36,6 @@
         <module>ManasaAndStones</module>
         <module>ACM_ICPC_Team</module>
         <module>ModifiedKaprekarNumbers</module>
+        <module>TaumAndBDay</module>
     </modules>
 </project>
