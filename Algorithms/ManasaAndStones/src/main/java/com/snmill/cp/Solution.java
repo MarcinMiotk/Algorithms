@@ -53,15 +53,14 @@ public class Solution {
 
         Set<Integer> uniqueLastValues = new HashSet<>();
 
-        int[][] variations = variationsWithRepetitions(stones-1, new int[]{a, b});
-        for (int[] variation : variations) {
+        variationsWithRepetitions(stones - 1, new int[]{a, b}, (int[] variation) -> {
             int sum = 0;
             for (int add : variation) {
                 sum += add;
             }
             uniqueLastValues.add(sum);
-        }
-                        
+        });
+
         int[] result = new int[uniqueLastValues.size()];
         int i = 0;
         Iterator<Integer> it = uniqueLastValues.iterator();
@@ -70,8 +69,25 @@ public class Solution {
             i++;
         }
         Arrays.sort(result);
-        
+
         return result;
+    }
+
+    public interface VariationsListener {
+
+        void onVariation(int[] variation);
+    }
+
+    public static void variationsWithRepetitions(int k, int[] n, VariationsListener listener) {
+        Iterator<int[]> iterator = new VariationWithoutRepetitions(k, n.length);
+        while (iterator.hasNext()) {
+            int[] indexes = iterator.next();
+            int[] variation = new int[k];
+            for (int i = 0; i < indexes.length; i++) {
+                variation[i] = n[indexes[i]];
+            }
+            listener.onVariation(variation);
+        }
     }
 
     public static int[][] variationsWithRepetitions(int k, int[] n) {
