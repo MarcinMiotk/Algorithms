@@ -43,10 +43,41 @@ public class Solution {
         return (int) Math.pow(n, k);
     }
 
+    public static int[] listOfNumbersWhichAreThePossibleValuesOfTheLastStone(int stones, int a, int b) {
+        assert a <= 1000;
+        assert b <= 1000;
+        assert stones <= 1000;
+
+        Set<Integer> uniqueLastValues = new HashSet<>();
+
+        // 4	-	0
+        // 3	-	1
+        // 2	-	2
+        // 1	-	3
+        // 0    -       4
+        stones--;
+        for (int howMuchA = 0; howMuchA <= stones; howMuchA++) {
+            int howMuchB = stones - howMuchA;
+            int sum = howMuchA * a + howMuchB * b;
+            uniqueLastValues.add(sum);
+        }
+
+        int[] result = new int[uniqueLastValues.size()];
+        int i = 0;
+        Iterator<Integer> it = uniqueLastValues.iterator();
+        while (it.hasNext()) {
+            result[i] = it.next();
+            i++;
+        }
+        Arrays.sort(result);
+
+        return result;
+    }
+
     // guess the value of the last stone
     // the number on the first stone was 0
     // find all the possible values for the number on the last stone.
-    public static int[] listOfNumbersWhichAreThePossibleValuesOfTheLastStone(int stones, int a, int b) {
+    public static int[] listOfNumbersWhichAreThePossibleValuesOfTheLastStone_not_efficient(int stones, int a, int b) {
         assert a <= 1000;
         assert b <= 1000;
         assert stones <= 1000;
