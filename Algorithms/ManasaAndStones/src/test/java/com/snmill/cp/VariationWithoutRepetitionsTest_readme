@@ -1,0 +1,5 @@
+for cursor = 2 and dispatching = 5
+    5/2*2 = 5/4 = 1     rest is 1
+    1/2*1 = 1/2 = 0     rest is 1
+    1/2*0 = 1/0 = set 1 here
+    
