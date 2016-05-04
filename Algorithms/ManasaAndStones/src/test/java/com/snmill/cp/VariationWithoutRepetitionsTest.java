@@ -117,4 +117,25 @@ public class VariationWithoutRepetitionsTest {
             System.out.println(sb.toString());
         }
     }
+
+    @Test
+    public void variationWithoutRepetitions_valid_variations_for_n2_k1000_print_only() {
+        int n = 2;
+        int k = 1000;
+        Iterator iterator = new VariationWithoutRepetitions(k, n);
+
+        int count = 0;
+        while (iterator.hasNext()) {
+            int[] indexes = (int[]) iterator.next();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = indexes.length - 1; i >= 0; i--) {
+                sb.append(indexes[i]);
+            }
+            System.out.println(sb.toString());
+        }
+
+        System.out.println();
+        System.out.println(count);
+    }
 }
