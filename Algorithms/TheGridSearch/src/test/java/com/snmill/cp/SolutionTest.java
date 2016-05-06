@@ -193,4 +193,24 @@ public class SolutionTest {
         Solution.main(null);
         assertEquals("YES", outContent.toString().trim());
     }
+
+    @Test
+    public void edge2() {
+        String input = ""
+                + "1\n"
+                + "4 6\n"
+                + "123412\n"
+                + "561212\n"
+                + "123634\n"
+                + "781288\n"
+                + "2 2\n"
+                + "12\n"
+                + "34";
+
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Solution.main(null);
+        assertEquals("YES", outContent.toString().trim());
+    }
 }
