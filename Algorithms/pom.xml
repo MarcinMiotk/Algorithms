@@ -38,5 +38,8 @@
         <module>ModifiedKaprekarNumbers</module>
         <module>TaumAndBDay</module>
         <module>TheTimeInWords</module>
+        <module>ExtraLongFactorials</module>
+        <module>TheGridSearch</module>
+        <module>Encryption</module>
     </modules>
 </project>
