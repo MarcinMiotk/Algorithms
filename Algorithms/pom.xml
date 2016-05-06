@@ -37,5 +37,6 @@
         <module>ACM_ICPC_Team</module>
         <module>ModifiedKaprekarNumbers</module>
         <module>TaumAndBDay</module>
+        <module>TheTimeInWords</module>
     </modules>
 </project>
