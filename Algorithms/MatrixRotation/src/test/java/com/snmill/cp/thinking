@@ -1,0 +1,63 @@
+ 1  2  3  4      2  3  4  8      3  4  8 12
+ 5  6  7  8      1  7 11 12      2 11 10 16
+ 9 10 11 12  ->  5  6 10 16  ->  1  7  6 15
+13 14 15 16      9 13 14 15      5  9 13 14
+
+
+
+ZEWNĘTRZNY
+    12 rotacji daje wyjściową pozycję
+    (rows-1)*2 + (cols-1)*2 = 3*2 +3*2 = 6+6 = 12
+
+WEWNĘTRZNY
+    4 rotacje dają wyjściową pozycję
+    1*2 + 1*2 = 4
+
+
+
+Każdy stopień to -2 cols i -2 rows
+
+
+A B C D E F
+G H I J K L
+L M N O P R
+S T U W Z 1
+2 3 4 5 6 7
+8 9 @ # $ %
+A B C D E F
+G H I J K L
+
+
+LinkedList A G L ....C B head is A. If head is changed into L then L S ... C B A G czyli
+to co jest przed L jest dawane z zachowaniem kolejnosci na koniec (tail) LinkedListy.
+
+
+
+ring=0, ring=1, ring=2
+LinkedList = get(matrix, ring);
+set(matrix, LinkedList, ring)
+
+
+if ring=0;
+
+a[0][0]
+a[1][0]
+...
+a[7][0]
+
+a[7][1]
+a[7][2]
+a[7][...5]
+
+a[6][4]
+a[6][4..0]
+
+a[0][5]
+a[0][4]
+a[0][...1]
+
+
+if ring=1
+
+a[1..5][1]
+a[5][1..
