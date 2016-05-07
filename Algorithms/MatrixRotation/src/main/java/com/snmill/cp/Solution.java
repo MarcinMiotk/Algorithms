@@ -82,6 +82,9 @@ public class Solution {
         final int matrixRows;
         final int ring;
         final int allSteps;
+        //
+        final int internalCols;
+        final int internalRows;
 
         public MatrixIterator(int[][] matrix, int matrixCols, int matrixRows, int ring) {
             this.matrix = matrix;
@@ -89,7 +92,13 @@ public class Solution {
             this.matrixRows = matrixRows;
             this.ring = ring;
             //
-            this.allSteps = (matrixCols - 1) * 2 + (matrixRows - 1) * 2;
+            this.internalCols = matrixCols - 2 * ring;
+            this.internalRows = matrixRows - 2 * ring;
+            //
+            this.allSteps = (internalCols - 1) * 2 + (internalRows - 1) * 2;
+            //
+            row = ring;
+            col = ring;
         }
 
         int step = 0;
@@ -99,21 +108,21 @@ public class Solution {
             return step < allSteps;
         }
 
-        int row = 0;
-        int col = 0;
+        int row;
+        int col;
         StepStrategy strategy = new Down();
 
         @Override
         public Coordinates next() {
             Coordinates prepare = new Coordinates(row, col);
 
-            if (step == matrixRows - 1) {
+            if (step == internalRows - 1) {
                 strategy = new Right();
             }
-            if (step == ((matrixRows - 1) + (matrixCols - 1))) {
+            if (step == ((internalRows - 1) + (internalCols - 1))) {
                 strategy = new Up();
             }
-            if (step == ((matrixRows - 1) + (matrixCols - 1) + (matrixRows - 1))) {
+            if (step == ((internalRows - 1) + (internalCols - 1) + (internalRows - 1))) {
                 strategy = new Left();
             }
             strategy.change();
