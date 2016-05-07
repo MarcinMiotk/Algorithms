@@ -37,6 +37,12 @@ public class Solution {
         return null;
     }
 
+    public static int maxRings(int rows, int cols) {
+        int min = (rows < cols ? rows : cols);
+
+        return min / 2;
+    }
+
     public static class Coordinates {
 
         @Override
