@@ -41,5 +41,7 @@
         <module>ExtraLongFactorials</module>
         <module>TheGridSearch</module>
         <module>Encryption</module>
+        <module>LarrysArray</module>
+        <module>NewYearChaos</module>
     </modules>
 </project>
