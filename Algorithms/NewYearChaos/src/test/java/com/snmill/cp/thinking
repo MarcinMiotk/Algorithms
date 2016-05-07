@@ -1,0 +1,80 @@
+2 5 1 3 4		oczekiwane jest na początku 2, 
+1 2 3 4 5		2 jest na pozycji [1] więc robię +1 brige
+2 1 3 4 5
+
+1 3 4 5			oczekiwane jest na początku 5
+				5 jest na pozycji [3], a 3 > 2
+				
+1 2 5 4		 	+bribe
+1 5 2 4			+bribe - wyczxerpano limit na bride dla [5]
+
+czyli dajemy "too chaotic"
+
+
+========================================================================
+Propozycja algorytmu:
+- Jeżeli dowolny a[i]>(i+1)+2, to dajemy "too chaotic".
+
+========================================================================
+
+
+
+
+1 2 3 4 5
+---------
+2 1 5 3 4
+
+dla i=0, a[0]=2, 		2>0+1+2, 2>3 fałsz
+						zamieniam a[0] z a[a[0]-1] czyli a[0] z a[1]					
+						bribe+
+2 1 3 4 5
+						a[0] == expected[0], więc wycinam first z a i expected
+						
+a = 1 3 4 5
+e = 1 5 3 4
+
+		a[0] = expected[0], wiec wycinam first z a i expected
+		
+a = 3 4 5
+e = 5 3 4				e[0]=5 
+                            if a[0]=5 then no bribe and SKIP
+                            if a[1]=5 then +1 bribe 
+                            if a[2]=5 then +2 brige 
+                            ELSE "TOO CHAOTIC".
+========================================================
+
+
+a=1 2 3 4 5
+e=2 1 5 3 4
+
+a=2 1 3 4 5
+a=1 3 4 5
+e=1 5 3 4
+
+
+a=3 4 5
+e=5 3 4
+
+
+
+e[0]=5=a[2] then 
+    3 4 5
+    3 5 4
+    5 3 4
+
+            removeFirst from Expected
+            remove(2) from A LinkedList
+
+            
+
+
+
+
+========================================================
+
+if e[0]=a[0] then Bribe(+0) and remove First from both Queues.
+if e[0]=a[1] then Bribe(+1) and take a[0] removeFirst() and addFirst(took value) and removeFirst from e
+if e[0]=a[2] then Bribe(+2) and removeFirst form Expected and remove(2) from A LinkedList.
+
+			
+
