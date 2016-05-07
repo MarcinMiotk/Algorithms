@@ -1,0 +1,173 @@
+
+Spostrzeżenie nr 1
+------------------
+Weźmy ciąg
+
+    ABCDEFGH
+    01234567
+
+chcemy przenieść F na początek listy, czyli a[4] na a[0] czyli -5 kroków.
+Możliwe są rotacje ABC->BCA->CAB czyli albo o -2 kroki albo o -1 krok.
+W 5 krokach są dwie rotacje o -2 kroki i 1 rotacja -1 krok, czyli:
+
+
+-2 kroki
+         !
+    ABCDEFGH
+    01234567
+
+       !
+    ABCFDEGH
+    01234567
+
+
+- 2 kroki
+
+       !
+    ABCFDEGH
+    01234567
+
+     ! 
+    AFBCDEGH
+    01234567
+
+Po tych operachach zwróć uwagę, że za F nadal jest zachowana kolejność czyli BCDEGH,
+czyli po -4 krokach okazało się, że doszło tylko wyciągnięcia z linedlist "F" i 
+wsadzenia go przed to co było na pozycji -4 czyli przed B. 
+
+
+Teraz robię zamianę -1
+
+
+- 1 krok
+
+     ! 
+    AFBCDEGH
+    01234567
+
+    !  
+    FBACDEGH
+    01234567
+
+Wiec tylko krok -1 powoduje prawdziwą rotację pozycji [1] i [2] i reszta jest bez zmian.
+
+
+==============================================================================
+Wnioski: Szukam najmniejszego elementu na liście i określam jego odległość
+od pozycji [0]. 
+
+Wyżej rozpatrzono przypadek 5 kroków (liczba nieparzysta). Teraz rozpatrzmy przypadek
+6 kroków (liczba parzysta).
+
+Przenoszę G na pozycję [0]. G jest na pozycjo [6], więc robię -6 kroków, czyli
+trzy rotacje (bo 6/2 = 3 i 6%2 = 0)
+
+          !
+    ABCDEFGH
+    01234567
+
+Rotacja pierwsza
+-2 kroki
+
+        !
+    ABCDGEFH
+    01234567
+
+
+Rotacja druga
+-2 kroki
+
+        !
+    ABCDGEFH
+    01234567
+
+      !
+    ABGCDEFH
+    01234567
+
+Rotacja trzecia
+-2 kroki
+
+
+    !
+    GABCDEFH
+    01234567
+
+
+Wniosek: Rezultat jest taki sam, jakbym z LinkedList wyciągnął G.
+
+
+==============================================================================
+
+Algorytm
+1) Ustalam [i] najmniejszego elementu w LinkedList.
+2) Jeżeli [i] jest parzyste, to po prostu usuwam ten element.
+3) Jeżeli [i] nie jest parzyste, to usuwam ten element oraz dodatkowo robię zamianę miejscami [0]<->[1].
+
+==============================================================================
+
+
+
+
+
+Przykład
+
+
+ 0  1  2  3  4  5  6  7  8  9 10 11
+...................................
+09 06 08 12 03 07 01 11 10 02 05 04
+                  **
+01 jest parzyste, więc usuwam z listy
+
+09 06 08 12 03 07 11 10 02 05 04
+                        **
+02 jest parzyste, więc usuwam z listy
+
+09 06 08 12 03 07 11 10 05 04
+            **            
+03 jest parzyste, więc usuwam z listy
+
+09 06 08 12 07 11 10 05 04
+                        **
+04 jest parzyste, więc usuwam z listy
+
+09 06 08 12 07 11 10 05
+                     **
+05 jest nieparzyste [i=7], więc usuwam z listy i zamieniam [0] z [1]
+
+06 09 08 12 07 11 10
+**                     
+06 jest na indeksie [0] więc tylko go usuwam z listy
+
+09 08 12 07 11 10
+         **                            
+07 jest na indeksie [3] który jest nieparzysty, więc usuwam go i zamieniam [0] z [1]
+
+08 09 12 11 10
+**                                    
+08 jest na indeksie [0] więc tylko go usuwam
+
+09 12 11 10
+**                                    
+09 jest na indeksie [0] więc tylko go usuwam
+
+
+12 11 10
+      **                                    
+10 jest na indeksie [2] więc tylko go usuwam
+
+
+12 11
+Zostały tylko dwa elementy na liście i element [1] jest większy od [0], dlatego odpowiedź końcowa to NIE.
+
+
+
+==============================================================================
+
+Algorytm
+1) Ustalam [i] najmniejszego elementu w LinkedList.
+2) Jeżeli [i] jest parzyste, to po prostu usuwam ten element.
+3) Jeżeli [i] nie jest parzyste, to usuwam ten element oraz dodatkowo robię zamianę miejscami [0]<->[1].
+4) Jeżeli [i] jest równe [0] to po prostu usuwa, ten element.
+5) Jeżeli lista ma tylko dwa elementy, to gdy [0]<[1], to odowiedź brzmi TAK, w przeciwnym razie NIE.
+==============================================================================
