@@ -1,5 +1,6 @@
 package com.snmill.cp;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -12,11 +13,11 @@ public class Solution {
             int testCases = scanner.nextInt();
             for (int t = 0; t < testCases; t++) {
                 int size = scanner.nextInt();
-                int[] array = new int[size];
+                LinkedList<Integer> chain = new LinkedList<>();
                 for (int i = 0; i < size; i++) {
-                    array[i] = scanner.nextInt();
+                    chain.add(scanner.nextInt());
                 }
-                boolean canFullySort = doesTheRobotCanFullySortA(array);
+                boolean canFullySort = doesTheRobotCanFullySortA(chain);
                 if (canFullySort) {
                     System.out.println("YES");
                 } else {
@@ -26,39 +27,44 @@ public class Solution {
         }
     }
 
-    static boolean doesTheRobotCanFullySortA(int[] a) {
-        int n = a.length;
-        // Choose any 3 consecutive indices and rotate their elements in such 
-        // a way that ABC rotates to BCA, which rotates to CAB, which rotates 
-        // back to ABC.
-        for (int i = 0; i <= n - 3; i++) {
-            if (!sort(a, i)) {
-                return false;
+    static boolean doesTheRobotCanFullySortA(LinkedList<Integer> chain) {
+        int findThisValue = 1;
+
+        while (chain.size() > 2) {
+            int index = indexOfThisValue(chain, findThisValue);
+            if (index == 0 || index % 2 == 0) {
+                // remove only
+                chain.remove(index);
+            } else {
+                // remove and swap [0] with [1]
+                chain.remove(index);
+
+                int b = chain.get(1);
+                int a = chain.get(0);
+                chain.removeFirst();
+                chain.removeFirst();
+
+                chain.addFirst(a);
+                chain.addFirst(b);
             }
+            findThisValue++;
         }
-        return true;
+
+        if (chain.get(0) < chain.get(1)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    static boolean sort(int[] array, int fromIndex) {
-        int a = array[fromIndex];
-        int b = array[fromIndex + 1];
-        int c = array[fromIndex + 2];
-        if (a <= b && b <= c) {
-            return true;
+    static int indexOfThisValue(LinkedList<Integer> chain, int findThisValue) {
+        int size = chain.size();
+        for (int i = 0; i < size; i++) {
+            if (chain.get(i) == findThisValue) {
+                return i;
+            }
         }
-        if (b <= c && c <= a) {
-            array[fromIndex] = b;
-            array[fromIndex + 1] = c;
-            array[fromIndex + 2] = a;
-            return true;
-        }
-        if (c <= a && a <= b) {
-            array[fromIndex] = c;
-            array[fromIndex + 1] = a;
-            array[fromIndex + 2] = b;
-            return true;
-        }
-        return false;
+        throw new IllegalArgumentException("Cannot find the value");
     }
 
 }
