@@ -39,10 +39,8 @@ public class Solution {
                 // remove and swap [0] with [1]
                 chain.remove(index);
 
-                int b = chain.get(1);
-                int a = chain.get(0);
-                chain.removeFirst();
-                chain.removeFirst();
+                int a = chain.removeFirst();
+                int b = chain.removeFirst();
 
                 chain.addFirst(a);
                 chain.addFirst(b);
