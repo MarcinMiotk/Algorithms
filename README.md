@@ -60,3 +60,15 @@ http://www.openculture.com/computer_science_free_courses
 NEXT TODO
 =========
 https://www.udacity.com/course/intro-to-algorithms--cs215
+
+
+
+
+
+
+
+WARTOŚCIOWE ROZWIĄZANIA, KTÓRE WYSŁAŁEM
+========================================
+https://www.hackerrank.com/challenges/larrys-array/editorial
+
+
