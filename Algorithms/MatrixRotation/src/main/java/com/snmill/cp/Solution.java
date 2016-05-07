@@ -1,6 +1,9 @@
 package com.snmill.cp;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -26,7 +29,7 @@ public class Solution {
                     if (col > 0) {
                         System.out.print(" ");
                     }
-                    System.out.print(matrix[row][col]);
+                    System.out.print(rotated[row][col]);
                 }
                 System.out.println();
             }
@@ -34,7 +37,51 @@ public class Solution {
     }
 
     public static int[][] rotate(int[][] matrix, int rotations) {
-        return null;
+        List<LinkedList<Integer>> rings = createRings(matrix);
+
+        for (LinkedList<Integer> ring : rings) {
+            int cycle = ring.size();
+            int newHeadPosition = rotations % cycle;
+            if (newHeadPosition > 0) {
+                for (int i = 0; i < newHeadPosition; i++) {
+                    ring.addFirst(ring.removeLast());
+                }
+            }
+        }
+
+        int[][] rotated = createMatrixFromRings(rings, matrix);
+
+        return rotated;
+    }
+
+    public static int[][] createMatrixFromRings(List<LinkedList<Integer>> rings, int[][] matrix) {
+        int[][] rotated = new int[matrix.length][matrix[0].length];
+
+        int maxRings = maxRings(matrix.length, matrix[0].length);
+        for (int ring = 0; ring < maxRings; ring++) {
+            MatrixIterator iterator = new MatrixIterator(matrix, matrix[0].length, matrix.length, ring);
+            int step = 0;
+            while (iterator.hasNext()) {
+                Coordinates coordinates = iterator.next();
+                rotated[coordinates.row][coordinates.col] = rings.get(ring).get(step++);
+            }
+        }
+        return rotated;
+    }
+
+    public static List<LinkedList<Integer>> createRings(int[][] matrix) {
+        List<LinkedList<Integer>> rings = new ArrayList<>();
+        int maxRings = maxRings(matrix.length, matrix[0].length);
+        for (int ring = 0; ring < maxRings; ring++) {
+            LinkedList<Integer> linkedList = new LinkedList<>();
+            MatrixIterator iterator = new MatrixIterator(matrix, matrix[0].length, matrix.length, ring);
+            while (iterator.hasNext()) {
+                Coordinates coordinates = iterator.next();
+                linkedList.add(matrix[coordinates.row][coordinates.col]);
+            }
+            rings.add(linkedList);
+        }
+        return rings;
     }
 
     public static int maxRings(int rows, int cols) {

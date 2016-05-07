@@ -61,3 +61,26 @@ if ring=1
 
 a[1..5][1]
 a[5][1..
+
+
+
+
+
+
+=========================================================================
+
+
+Dla każdej LinkedList
+1) cycle = linkedlist.size();
+2) liczę rotations%cycle = newHeadPosition
+3) z danej linked list biorę newHeadPosition elementów i daję je na TAIL
+
+
+
+
+
+
+
+
+
+

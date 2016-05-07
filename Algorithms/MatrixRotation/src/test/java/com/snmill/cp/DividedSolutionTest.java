@@ -11,6 +11,18 @@ import org.junit.Test;
 public class DividedSolutionTest {
 
     @Test
+    public void rotate_one() {
+        int[][] matrix = new int[][]{
+            {1, 2, 3, 4, 5, 6},
+            {7, 8, 9, 1, 2, 3},
+            {4, 5, 6, 7, 8, 9},
+            {1, 2, 3, 4, 5, 6}
+        };
+
+        int[][] rotated = Solution.rotate(matrix, 1);
+    }
+
+    @Test
     public void maxRings_2() {
         int[][] matrix = new int[][]{
             {1, 2, 3, 4, 5, 6},
