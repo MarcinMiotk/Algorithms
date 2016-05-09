@@ -1,0 +1,19 @@
+=============================================================================
+abcd
+parzysta
+
+czyli prawa strona musi byc rowna lewej stronie.
+
+Algorytm:
+1. Biorę dwa iteratory - do prawej i do lewej dla każdej z dwóch części
+2. Gdy znajdę różne znaki, to ten większy sprowadzam do mniejszego (liczbąc ilość kroków).
+
+=============================================================================
+
+abcde
+nie parzysta
+środkiem jest 'c'
+
+Algorytm:
+1. Biorę dwa iteratory - od prawej i do lewej dla kazdej z dwoch czesci (srodek czyli 'c' się nie wlicza)
+2. Gdy znajdę różne znaki, to ten większy sprowadzam do mniejszego (liczbąc ilość kroków).
