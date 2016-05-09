@@ -72,3 +72,14 @@ WARTOŚCIOWE ROZWIĄZANIA, KTÓRE WYSŁAŁEM
 https://www.hackerrank.com/challenges/larrys-array/editorial
 
 
+https://www.codeeval.com/
+
+
+
+http://eduinf.waw.pl/inf/alg/001_search/index.php
+
+
+====================================================
+dla dzieci 	=		MIT stratch
+
+
