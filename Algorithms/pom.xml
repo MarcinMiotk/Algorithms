@@ -46,5 +46,7 @@
         <module>MatrixRotation</module>
         <module>Pangrams</module>
         <module>AlternatingCharacters</module>
+        <module>TheLoveLetterMystery</module>
+        <module>Gemstones</module>
     </modules>
 </project>
