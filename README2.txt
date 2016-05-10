@@ -85,6 +85,10 @@ dla dzieci 	=		MIT stratch
 					
 architektura von Neumanna
 
+
+bike shading
+
+
 					
 
 

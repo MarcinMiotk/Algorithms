@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Algorithms.iml" filepath="$PROJECT_DIR$/Algorithms/Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/AngryProfessor/AngryProfessor.iml" filepath="$PROJECT_DIR$/Algorithms/AngryProfessor/AngryProfessor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/CaesarCipher/CaesarCipher.iml" filepath="$PROJECT_DIR$/Algorithms/CaesarCipher/CaesarCipher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/CavityMap/CavityMap.iml" filepath="$PROJECT_DIR$/Algorithms/CavityMap/CavityMap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/ChocolateFeast/ChocolateFeast.iml" filepath="$PROJECT_DIR$/Algorithms/ChocolateFeast/ChocolateFeast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Codility/Codility.iml" filepath="$PROJECT_DIR$/Algorithms/Codility/Codility.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CompetitiveProgramming.iml" filepath="$PROJECT_DIR$/CompetitiveProgramming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/CutTheSticks/CutTheSticks.iml" filepath="$PROJECT_DIR$/Algorithms/CutTheSticks/CutTheSticks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/DiagonalDifference/DiagonalDifference.iml" filepath="$PROJECT_DIR$/Algorithms/DiagonalDifference/DiagonalDifference.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/FindDigits/FindDigits.iml" filepath="$PROJECT_DIR$/Algorithms/FindDigits/FindDigits.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/LisasWorkbook/LisasWorkbook.iml" filepath="$PROJECT_DIR$/Algorithms/LisasWorkbook/LisasWorkbook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/LonelyInteger/LonelyInteger.iml" filepath="$PROJECT_DIR$/Algorithms/LonelyInteger/LonelyInteger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/MaximumSubarray/MaximumSubarray.iml" filepath="$PROJECT_DIR$/Algorithms/MaximumSubarray/MaximumSubarray.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Pairs/Pairs.iml" filepath="$PROJECT_DIR$/Algorithms/Pairs/Pairs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/PlusMinus/PlusMinus.iml" filepath="$PROJECT_DIR$/Algorithms/PlusMinus/PlusMinus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/ServiceLane/ServiceLane.iml" filepath="$PROJECT_DIR$/Algorithms/ServiceLane/ServiceLane.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/SherlockAndSquares/SherlockAndSquares.iml" filepath="$PROJECT_DIR$/Algorithms/SherlockAndSquares/SherlockAndSquares.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/SherlockAndTheBeast/SherlockAndTheBeast.iml" filepath="$PROJECT_DIR$/Algorithms/SherlockAndTheBeast/SherlockAndTheBeast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/SimpleArraySum/SimpleArraySum.iml" filepath="$PROJECT_DIR$/Algorithms/SimpleArraySum/SimpleArraySum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/SnakesAndLaddersTheQuickestWayUp/SnakesAndLaddersTheQuickestWayUp.iml" filepath="$PROJECT_DIR$/Algorithms/SnakesAndLaddersTheQuickestWayUp/SnakesAndLaddersTheQuickestWayUp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/SortingIntro/SortingIntro.iml" filepath="$PROJECT_DIR$/Algorithms/SortingIntro/SortingIntro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Staircase/Staircase.iml" filepath="$PROJECT_DIR$/Algorithms/Staircase/Staircase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/TimeConversion/TimeConversion.iml" filepath="$PROJECT_DIR$/Algorithms/TimeConversion/TimeConversion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/UtopianTree/UtopianTree.iml" filepath="$PROJECT_DIR$/Algorithms/UtopianTree/UtopianTree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/VeryBigSum/VeryBigSum.iml" filepath="$PROJECT_DIR$/Algorithms/VeryBigSum/VeryBigSum.iml" />
+    </modules>
+  </component>
+</project>

@@ -48,5 +48,6 @@
         <module>AlternatingCharacters</module>
         <module>TheLoveLetterMystery</module>
         <module>Gemstones</module>
+        <module>FunnyString</module>
     </modules>
 </project>

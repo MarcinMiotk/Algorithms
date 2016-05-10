@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/AngryProfessor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/CaesarCipher" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/CavityMap" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/ChocolateFeast" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/Codility" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/CutTheSticks" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/DiagonalDifference" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/FindDigits" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/LisasWorkbook" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/LonelyInteger" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/MaximumSubarray" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/Pairs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/PlusMinus" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/ServiceLane" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/SherlockAndSquares" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/SherlockAndTheBeast" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/SimpleArraySum" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/SnakesAndLaddersTheQuickestWayUp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/SortingIntro" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/Staircase" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/TimeConversion" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/UtopianTree" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Algorithms/VeryBigSum" charset="UTF-8" />
+  </component>
+</project>

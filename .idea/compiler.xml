@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="AngryProfessor" />
+        <module name="CaesarCipher" />
+        <module name="CavityMap" />
+        <module name="ChocolateFeast" />
+        <module name="Codility" />
+        <module name="CutTheSticks" />
+        <module name="DiagonalDifference" />
+        <module name="FindDigits" />
+        <module name="LisasWorkbook" />
+        <module name="LonelyInteger" />
+        <module name="MaximumSubarray" />
+        <module name="Pairs" />
+        <module name="PlusMinus" />
+        <module name="ServiceLane" />
+        <module name="SherlockAndSquares" />
+        <module name="SherlockAndTheBeast" />
+        <module name="SimpleArraySum" />
+        <module name="SnakesAndLaddersTheQuickestWayUp" />
+        <module name="SortingIntro" />
+        <module name="Staircase" />
+        <module name="TimeConversion" />
+        <module name="UtopianTree" />
+        <module name="VeryBigSum" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Algorithms" target="1.8" />
+      <module name="AngryProfessor" target="1.8" />
+      <module name="CaesarCipher" target="1.8" />
+      <module name="CavityMap" target="1.8" />
+      <module name="ChocolateFeast" target="1.8" />
+      <module name="Codility" target="1.8" />
+      <module name="CompetitiveProgramming" target="1.8" />
+      <module name="CutTheSticks" target="1.8" />
+      <module name="DiagonalDifference" target="1.8" />
+      <module name="FindDigits" target="1.8" />
+      <module name="LisasWorkbook" target="1.8" />
+      <module name="LonelyInteger" target="1.8" />
+      <module name="MaximumSubarray" target="1.8" />
+      <module name="Pairs" target="1.8" />
+      <module name="PlusMinus" target="1.8" />
+      <module name="ServiceLane" target="1.8" />
+      <module name="SherlockAndSquares" target="1.8" />
+      <module name="SherlockAndTheBeast" target="1.8" />
+      <module name="SimpleArraySum" target="1.8" />
+      <module name="SnakesAndLaddersTheQuickestWayUp" target="1.8" />
+      <module name="SortingIntro" target="1.8" />
+      <module name="Staircase" target="1.8" />
+      <module name="TimeConversion" target="1.8" />
+      <module name="UtopianTree" target="1.8" />
+      <module name="VeryBigSum" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
