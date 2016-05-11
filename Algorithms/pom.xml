@@ -49,5 +49,8 @@
         <module>TheLoveLetterMystery</module>
         <module>Gemstones</module>
         <module>FunnyString</module>
+        <module>Anagram</module>
+        <module>PalindromeIndex</module>
+        <module>GameOfThronesI</module>
     </modules>
 </project>
