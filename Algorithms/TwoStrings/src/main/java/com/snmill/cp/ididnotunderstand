@@ -1,0 +1,19 @@
+    static boolean ifThereIsACommonSubstring_matching(String longer, String shorter) {
+
+        for (int longIndex = 0; longIndex < longer.length(); longIndex++) {
+            // if the character matches to first character in shorter then
+            // i verify the rest
+            if (longer.charAt(longIndex) == shorter.charAt(0)) {
+                for (int shortIndex = 0; shortIndex < shorter.length(); shortIndex++) {
+                    if (longer.charAt(longIndex + shortIndex) == shorter.charAt(shortIndex)) {
+
+                    } else {
+                        break;
+                    }
+                }
+                return true;
+            }
+        }
+
+        return false;
+    }
