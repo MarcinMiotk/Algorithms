@@ -1,0 +1,52 @@
+Two strings are called an anagrammatic pair when they have:
+- the same length
+- the same set of characters
+==================================================================
+Wnioski:
+
+1.  Skoro szukamy par, to obie musząmieć taką samą długość. Słowo musi być
+    więc zarze parzyste i trzeba go podzielić na 2.
+
+
+
+
+1234
+abba
+
+[1,1]+[4,4]     =   a + a
+[1,2]+[3,4]     =   ab + ba
+[2,2]+[3,3]     =   b + b
+[1,3]+[2,4]     =   abb + bba
+
+
+
+123456789[10]
+iwwhrlkpek
+    i   =   1
+    w   =   2
+    h   =   1
+    r   =   1
+    l   =   1
+    k   =   2
+    p   =   1
+    e   =   1 
+
+    mam tylko k i w po 2 elementy
+        
+    [2,2]+[3,3]     =   w + w
+    [7,7]+[10,10]   =   k + k
+    [7,9]+[8,10]    =   kpe + pek
+
+
+
+// print all possible substrings with 1 sign        
+// print all possible substrings with 2 signs
+// ...
+// print all possible substrings with n/2 signs   
+
+
+
+0   1
+0   2
+0   len-1
+
