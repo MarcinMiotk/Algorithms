@@ -188,4 +188,43 @@ public class Solution {
         }
         return counters;
     }
+
+    static int[] countersShiftBasedOnDna(int[] dna, int[] counters, int holeLength, int step) {
+        return counters;
+    }
+
+    static class Counters {
+
+        int[] counters;
+        int holeLength;
+        int[] dna;
+        int maxValue;
+        //
+        int leftPointer = 0;
+
+        public Counters(int holeLength, int[] dna, int maxValue) {
+            this.counters = Solution.countersWithout(dna, leftPointer, leftPointer + holeLength - 1, maxValue);
+            this.holeLength = holeLength;
+            this.dna = dna;
+            this.maxValue = maxValue;
+        }
+
+        int[] getCounters() {
+            return counters;
+        }
+
+        void right() {
+            int outOfHole = dna[leftPointer];
+            int intoHole = dna[leftPointer + holeLength];
+            leftPointer++;
+            counters[outOfHole]++;
+            counters[intoHole]--;
+        }
+
+        boolean canMoveRight() {
+            return leftPointer + holeLength < dna.length;
+        }
+
+    }
+
 }

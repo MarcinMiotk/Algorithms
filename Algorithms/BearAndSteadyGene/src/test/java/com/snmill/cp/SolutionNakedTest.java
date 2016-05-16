@@ -1,5 +1,6 @@
 package com.snmill.cp;
 
+import com.snmill.cp.Solution.Counters;
 import static com.snmill.cp.Solution.convert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -78,6 +79,66 @@ public class SolutionNakedTest {
         assertEquals(0, countersWithout[1]);
         assertEquals(0, countersWithout[2]);
         assertEquals(1, countersWithout[3]);
+    }
+
+    @Test
+    public void shiftDnaInCounters_forLength4() {
+        int[] dna = new int[]{3, 0, 0, 0, 2, 0, 0, 0};
+        Counters counters = new Solution.Counters(4, dna, 2);
+        assertTrue(counters.canMoveRight());
+        //xxxx   
+        //30002000
+        //    2000
+        assertArrayEquals(new int[]{3, 0, 1, 0}, counters.getCounters());
+        counters.right();
+        // xxxx   
+        //30002000
+        //3    000          +3 at [0] and -2 at [4]        
+        assertArrayEquals(new int[]{3, 0, 0, 1}, counters.getCounters());
+        counters.right();
+        //  xxxx   
+        //30002000
+        //30    00          +0 at [1] and -0 at [5]        
+        assertArrayEquals(new int[]{3, 0, 0, 1}, counters.getCounters());
+        counters.right();
+        //   xxxx   
+        //30002000
+        //300    0          +0 at [2] and -0 at [6]        
+        assertArrayEquals(new int[]{3, 0, 0, 1}, counters.getCounters());
+        assertTrue(counters.canMoveRight());
+        counters.right();
+        //    xxxx   
+        //30002000
+        //3000              +0 at [3] and -0 at [7]        
+        assertArrayEquals(new int[]{3, 0, 0, 1}, counters.getCounters());
+        assertFalse(counters.canMoveRight());
+    }
+
+    @Test
+    public void shiftDnaInCounters_forLength5() {
+        int[] dna = new int[]{3, 0, 0, 0, 2, 0, 0, 0};
+        Counters counters = new Solution.Counters(5, dna, 2);
+        assertTrue(counters.canMoveRight());
+        //xxxxx   
+        //30002000
+        //     000
+        assertArrayEquals(new int[]{3, 0, 0, 0}, counters.getCounters());
+        counters.right();
+        // xxxxx   
+        //30002000
+        //3     00          +3 at [0] and -0 at [5]        
+        assertArrayEquals(new int[]{2, 0, 0, 1}, counters.getCounters());
+        counters.right();
+        //  xxxxx   
+        //30002000
+        //30     0          +0 at [1] and -0 at [6]        
+        assertArrayEquals(new int[]{2, 0, 0, 1}, counters.getCounters());
+        counters.right();
+        //   xxxxx   
+        //30002000
+        //300              +0 at [2] and -0 at [7]        
+        assertArrayEquals(new int[]{2, 0, 0, 1}, counters.getCounters());
+        assertFalse(counters.canMoveRight());
     }
 
 }
