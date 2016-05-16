@@ -52,12 +52,25 @@ public class Solution {
         int[] missingCountersInDna = countersMissing(countersDna, requiredFrequency);
         int mutationLength = sum(missingCountersInDna);
 
-        while (mutationLength < 1500) {
+        while (mutationLength < dna.length) {
             // dla 4
+
+            int exceededType = -1;
+
             for (int excludeDnaFrom = 0; excludeDnaFrom <= dna.length - mutationLength; excludeDnaFrom++) {
-                int[] meybeSteadyCounters = countersWithout(dna, excludeDnaFrom, excludeDnaFrom + mutationLength - 1, requiredFrequency);
-                if (canBeSteady(meybeSteadyCounters, requiredFrequency)) {
-                    return mutationLength;
+
+                if (exceededType == -1 || (excludeDnaFrom > 0 && (dna[excludeDnaFrom - 1] == exceededType || dna[excludeDnaFrom] == exceededType))) {
+
+                    int[] meybeSteadyCounters = countersWithout(dna, excludeDnaFrom, excludeDnaFrom + mutationLength - 1, requiredFrequency);
+                    if (canBeSteady(meybeSteadyCounters, requiredFrequency)) {
+                        return mutationLength;
+                    } else {
+                        for (int t = 0; t < meybeSteadyCounters.length; t++) {
+                            if (meybeSteadyCounters[t] > requiredFrequency) {
+                                exceededType = t;
+                            }
+                        }
+                    }
                 }
             }
             mutationLength++;
