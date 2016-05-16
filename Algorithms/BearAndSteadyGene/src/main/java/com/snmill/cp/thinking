@@ -1,0 +1,224 @@
+GAAATAAA
+
+required=2
+len=8
+
+
+A=6 C=0 T=1 G=1
+
+A=6 > 2, liczę (6-req=6-2=4)-> MIN(+4)
+
+A=2 C=0 T=1 G=1     reszta 4 do rozłożenia
+
+Rozkładanie
+    C=0, różnicza 0-req=-2, czyli biorę RESZTA-2 = 2          
+
+A=2 C=2 T=1 G=1     reszta 2
+
+A=2 C=2 T=1 G=1     1 dodaję do T i 1 dodaję do G
+
+A=2 C=2 T=2 G=2
+
+Mam na stosie 4, więc dla każego <2,
+- jeśli = 0, to 4-required = 4-2 = 2 i robię MIN(+2).
+
+Teraz mam na stocie 2 więc dla każdego <2
+
+
+===================
+
+GAAATAAA
+      AA
+    TT      +1
+GAAA        +2
+GACC        +1
+GGCCTTAA      
+01110100
+
+
+dążę do wypełniania required
+
+AAATAAAG
+00101110 
+
+min index z 1
+max index z 1
+obliczanie rozniczy min i max
+
+
+
+ACTG=6011
+A=-4
+C=+2
+T=+1
+G=+1
+===================
+Skoro n=8, to r=2
+
+1. ACTG=0000    mam     GAAATAAA        take left - G
+   ACTG=0001    mam      AAATAAA        take right - A
+   ACTG=1001    mam      AAATAA         take left - A
+   ACTG=2001    mam       AATAA         take righ - A
+                                        A jest juz wyczerpane wiec musze zaznaczyc jako *
+                          AATA*         take left - A
+                                        A jest juz wyczerpane wiec musze zaznaczyc jako *
+                                           
+                          mam już MIN i MAX, wiec roznica to 5
+
+
+
+
+
+
+
+
+
+
+
+
+AGAATAAA
+  GT CC
+    
+
+
+
+
+
+
+
+
+
+
+
+
+A=6
+C=13
+T=12
+G=9
+
+
+
+TGATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTTGC
+
+
+TGATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTTGC
+ GATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTTG			T=1 C=1
+  ATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTT			T=1 C=1 G=2
+   TGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGT 			T=2 C=1 G=2 A=1
+    GCCGTCCCCTCAACTTGAGTGCTCCTAATGCG  			T=4 C=1 G=2 A=1
+     CCGTCCCCTCAACTTGAGTGCTCCTAATGC   			T=4 C=1 G=4 A=1 
+      CGTCCCCTCAACTTGAGTGCTCCTAATG   			T=4 C=3 G=4 A=1
+       GTCCCCTCAACTTGAGTGCTCCTAAT   			T=4 C=4 G=5 A=1
+	TCCCCTCAACTTGAGTGCTCCTAA    			T=5 C=4 G=6 A=1
+	 CCCCTCAACTTGAGTGCTCCTA    			T=6 C=4 G=6 A=2
+          CCCTCAACTTGAGTGCTCCT     		        T=6 C=5 G=6 A=3
+           CCTCAACTTGAGTGCTCC     			T=7 C=6 G=6 A=3
+            CTCAACTTGAGTGCTC     			T=7 C=8 G=6 A=3
+	     TCAACTTGAGTGCT     			T=7 C=10 G=6 A=3
+	      CAACTTGAGTGC                              T=9 C=10 G=6 A=3
+	      !ACTTGAGTG!    ** LEFT	   		T=9 C=10 G=6 A=3
+	      ! CTTGAGT !             	   		T=9 C=10 G=7 A=4
+	      ! !TTGAG  !             	   		T=10 C=10 G=7 A=4
+	      ! !!TGA   !             	   		T=10 C=10 G=8 A=4
+	      ! !!!G    !             	   		T=10 C=10 G=8 A=5
+	      ! !!!     !             	   		T=10 C=10 G=9 A=5
+			  
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------
+given
+GAAATAAA
+----------------------------------------------------------------------
+expected    ACTG=2222
+is          ACTG=6011
+leaks       ACTG=0211       = 4 elements
+----------------------------------------------------------------------
+create set {CCTG}
+----------------------------------------------------------------------
+iterate 1..(n-4)
+GAAATAAA
+CCTG
+CCTGTAAA    => ACTG=3... wrong
+
+GAAATAAA
+ CCTG
+GCCTGAAA    => ACTG=3... wrong
+
+GAAATAAA
+  CCTG
+GACCTGAA    => ACTG=3... wrong
+
+GAAATAAA
+   CCTG
+GAACCTGA    => ACTG=3... wrong
+
+GAAATAAA
+    CCTG
+GAAACCTG    => ACTG=3... wrong
+----------------------------------------------------------------------
+there is no "steady" for len=4
+----------------------------------------------------------------------
+I create 4 variants 
+    {CCTG+A}    exclude because A>2
+    {CCTG+C}    exluce because C=3 and C>2
+    {CCTG+T}    accepted
+    {CCTG+G}    accepted
+
+but I've accepted only 
+    {CCTG+T}    accepted
+    {CCTG+G}    accepted
+----------------------------------------------------------------------
+
+iterate 1..(n-5)
+
+
+GAAATAAA
+CCTGT       failed because A=3>2
+GAAATAAA
+CCTGG       failed because A=3>2
+
+
+GAAATAAA
+ CCTGT       
+GCCTGTAA    success !!!!
+
+RETURN 5
+----------------------------------------------------------------------
+
+
+CCTG+AA
+    +AC
+    +AT
+    +AG
+   
+
+
+----------------------------------------------------------------------
+
+Plan:
+1. Obliczyć ustalić counters_expected{ACTG} oraz counters_now{ACTG} oraz counters_missings{ACTG}
+2. Robić replace counterów dla każdego 1..n-LENM i sprawdzać regułę STEADY. Jeśli zaskoczy to zwracać LENM
+3. Jeśli nie zaskoczyło STEDY, to:
+    3.1. Tworzę kombinację 1 elementową bez powtórzen z counters_missings{ACTG}, które>0 i <STEADY_RULE
+    3.2. Dostaję T oraz G
+    3.3. Tworzę warianty {+G} o {+T} i powtarzam punkt 2.
+4. Jeśli nadal nie zaskoczyło STEDY, to:
+    4.1 Tworzę kombinację 2 elementową bez powtórzeń z counters_missing{ACTG}, które >0 i <STEADY_RULE
+    4.2 Dostaję np. C, T, G i tworzę
+                +CC
+                +TT
+                +GG
+                +CT
+                +CG
+                +TG
+    4.3 Dla każdego powyższego robię krok 2.
+
+----------------------------------------------------------------------
