@@ -225,3 +225,52 @@ Plan:
 
 
 29,995 seconds so solve
+
+
+
+
+=======================================
+missing
+0	=	0
+1	=	331
+2	=	423
+3	=	446
+=======================================
+
+1. Tworzę counters dla dna[i..i+missing]
+2. Odejmuję to od total counters
+3. W total counters wpisuję counters z mutation
+
+
+
+=======================================
+
+0123
+ACTG
+
+30002000
+GAAATAAA
+
+required=2
+30002000        =   ACTG=6011   missing=0211=4
+
+
+6011    current
+0211    missing
+
+
+LEN=4
+count without [0..4] then ....2000  => ACID=3010    has 3 next
+count without [1..5] then 3....000  => ACID=3001    has 3 next
+count without [2..6] then 30....00  => ACID=3...    has 3 next
+count without [3..7] then 300....0  => ACID=3...    has 3 next
+count without [4..8] then 3000....  => ACID=3...    has 3 next
+
+LEN=5                     30002000
+count without [0..5] then .....000  => ACID=3...    has 3 next
+count without [1..6] then 3.....00  => ACID=2..1    
+ 
+
+
+  
+

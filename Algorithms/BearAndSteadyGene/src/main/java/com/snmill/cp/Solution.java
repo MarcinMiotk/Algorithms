@@ -48,16 +48,31 @@ public class Solution {
         int n = dna.length;
         int requiredFrequency = n / 4;
 
-        int[] now = counters(dna);
-        int[] missing = countersMissing(now, requiredFrequency);
+        int[] countersDna = counters(dna);
+        int[] missingCountersInDna = countersMissing(countersDna, requiredFrequency);
+        int mutationLength = sum(missingCountersInDna);
 
-        int mutationLength = sum(missing);
-
-        if (search(dna, missing, mutationLength)) {
-            return mutationLength;
-        } else {
-            return mutationLength + 1;
+        while (mutationLength < 1500) {
+            // dla 4
+            for (int excludeDnaFrom = 0; excludeDnaFrom <= dna.length - mutationLength; excludeDnaFrom++) {
+                int[] meybeSteadyCounters = countersWithout(dna, excludeDnaFrom, excludeDnaFrom + mutationLength - 1, requiredFrequency);
+                if (canBeSteady(meybeSteadyCounters, requiredFrequency)) {
+                    return mutationLength;
+                }
+            }
+            mutationLength++;
         }
+
+        return -1;
+    }
+
+    static boolean canBeSteady(int[] counters, int required) {
+        for (int c : counters) {
+            if (c > required) {
+                return false;
+            }
+        }
+        return true;
     }
 
     static int[] createMutingDna(int[] missing) {
@@ -77,7 +92,7 @@ public class Solution {
         for (int i = 0; i <= dna.length - mutationLength; i++) {
             int[] working = copy(dna);
             for (int m = 0; m < muting.length; m++) {
-                working[i+m] = muting[m];
+                working[i + m] = muting[m];
             }
             if (isSteady(working)) {
                 return true;
@@ -128,6 +143,35 @@ public class Solution {
         int[] counters = new int[4];
         for (int i = 0; i < dna.length; i++) {
             counters[dna[i]]++;
+        }
+        return counters;
+    }
+
+    static int[] countersWithout(int[] dna, int silenceFrom, int silenceTo) {
+        int[] counters = new int[4];
+        for (int i = 0; i < dna.length; i++) {
+            if (i >= silenceFrom && i <= silenceTo) {
+
+            } else {
+                counters[dna[i]]++;
+            }
+        }
+        return counters;
+    }
+
+    static int[] countersWithout(int[] dna, int silenceFrom, int silenceTo, int maxValue) {
+        int[] counters = new int[4];
+        for (int i = 0; i < dna.length; i++) {
+            if (i >= silenceFrom && i <= silenceTo) {
+
+            } else {
+                counters[dna[i]]++;
+
+                // shorten !!!
+                if (counters[dna[i]] > maxValue) {
+                    return counters;
+                }
+            }
         }
         return counters;
     }

@@ -69,4 +69,15 @@ public class SolutionNakedTest {
         assertArrayEquals(mutingExpected, muting);
     }
 
+    @Test
+    public void countersWithout() {
+        //                       x  x  x  x
+        int[] dna = new int[]{3, 0, 0, 0, 2, 0, 0, 0};
+        int[] countersWithout = Solution.countersWithout(dna, 1, 4);
+        assertEquals(3, countersWithout[0]);
+        assertEquals(0, countersWithout[1]);
+        assertEquals(0, countersWithout[2]);
+        assertEquals(1, countersWithout[3]);
+    }
+
 }

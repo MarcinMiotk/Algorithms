@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import static java.lang.System.in;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
