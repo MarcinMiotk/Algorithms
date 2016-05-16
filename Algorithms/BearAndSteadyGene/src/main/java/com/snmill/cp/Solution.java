@@ -1,6 +1,5 @@
 package com.snmill.cp;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -17,31 +16,100 @@ public class Solution {
         }
     }
 
-    static int minimumLengthOfTheSubstringReplacedToMakeDnaStable(String dna) {
-        int n = dna.length();
-        int requiredFrequency = n / 4;
-        Counters counters = new Counters(requiredFrequency);
-        SqueezeIterator iterator = new SqueezeIterator(dna);
-        int free = 0;
-        while (iterator.hasNext()) {
-            CharSide current = iterator.next();
-            if (counters.isFinalAfterCharacter(current)) {
-                break;
+    static int[] convert(String dnaAsString) {
+        int[] dna = new int[dnaAsString.length()];
+        for (int i = 0; i < dna.length; i++) {
+            char characterToMap = dnaAsString.charAt(i);
+            switch (characterToMap) {
+                case 'A':
+                    dna[i] = 0;
+                    break;
+                case 'C':
+                    dna[i] = 1;
+                    break;
+                case 'T':
+                    dna[i] = 2;
+                    break;
+                case 'G':
+                    dna[i] = 3;
+                    break;
+                default:
+                    throw new RuntimeException();
             }
-            free++;
         }
-        int minimum = n - free + 2;
-        return minimum;
+        return dna;
     }
 
-    static boolean isSteady(String dna) {
-        int n = dna.length();
+    static int minimumLengthOfTheSubstringReplacedToMakeDnaStable(String dnaAsString) {
+        return minimumLengthOfTheSubstringReplacedToMakeDnaStable(convert(dnaAsString));
+    }
+
+    static int minimumLengthOfTheSubstringReplacedToMakeDnaStable(int[] dna) {
+        int n = dna.length;
+        int requiredFrequency = n / 4;
+
+        int[] now = counters(dna);
+        int[] missing = countersMissing(now, requiredFrequency);
+
+        int mutationLength = sum(missing);
+
+        if (search(dna, missing, mutationLength)) {
+            return mutationLength;
+        } else {
+            return mutationLength + 1;
+        }
+    }
+
+    static int[] createMutingDna(int[] missing) {
+        int mutationLength = sum(missing);
+        int[] mutedSubDna = new int[mutationLength];
+        int index = 0;
+        for (int i = 0; i < missing.length; i++) {
+            for (int copy = 0; copy < missing[i]; copy++) {
+                mutedSubDna[index++] = i;
+            }
+        }
+        return mutedSubDna;
+    }
+
+    static boolean search(int[] dna, int[] missing, int mutationLength) {
+        int[] muting = createMutingDna(missing);
+        for (int i = 0; i <= dna.length - mutationLength; i++) {
+            int[] working = copy(dna);
+            for (int m = 0; m < muting.length; m++) {
+                working[i+m] = muting[m];
+            }
+            if (isSteady(working)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static int[] copy(int[] from) {
+        int[] copy = new int[from.length];
+        System.arraycopy(from, 0, copy, 0, from.length);
+        return copy;
+    }
+
+    static int[] countersMissing(int[] countersNow, int required) {
+        int[] missing = new int[countersNow.length];
+        for (int i = 0; i < countersNow.length; i++) {
+            if (countersNow[i] >= required) {
+                missing[i] = 0;
+            } else {
+                missing[i] = required - countersNow[i];
+            }
+        }
+        return missing;
+    }
+
+    static boolean isSteady(int[] dna) {
+        int n = dna.length;
         int requiredFrequency = n / 4;
         int[] counters = counters(dna);
-        // 4,4,4,4
-        int sum = sum(counters);
         for (int counter : counters) {
-            if (counter != 0 && counter != requiredFrequency) {
+            if (counter != requiredFrequency) {
                 return false;
             }
         }
@@ -56,152 +124,11 @@ public class Solution {
         return sum;
     }
 
-    static class Counters {
-
-        final int requiredFrequency;
-
-        public Counters(int requiredFrequency) {
-            this.requiredFrequency = requiredFrequency;
-        }
-
-        int a = 0;
-        int c = 0;
-        int t = 0;
-        int g = 0;
-
-        boolean boundLeft = false;
-        boolean boundRight = false;
-
-        boolean incrementAndCheckBoundReaching(char character) {
-            switch (character) {
-                case 'A':
-                    if (a <= requiredFrequency) {
-                        a++;
-                        return false;
-                    } else {
-                        return true;
-                    }
-                case 'C':
-                    if (c <= requiredFrequency) {
-                        c++;
-                        return false;
-                    } else {
-                        return true;
-                    }
-                case 'T':
-                    if (t <= requiredFrequency) {
-                        t++;
-                        return false;
-                    } else {
-                        return true;
-                    }
-                case 'G':
-                    if (g <= requiredFrequency) {
-                        g++;
-                        return false;
-                    } else {
-                        return true;
-                    }
-                default:
-                    throw new RuntimeException("Input error");
-            }
-        }
-
-        boolean isFinalAfterCharacter(CharSide offered) {
-            if (offered.side == Side.LEFT && !boundLeft) {
-                if (incrementAndCheckBoundReaching(offered.character)) {
-                    boundLeft = true;
-                }
-            }
-
-            if (offered.side == Side.RIGHT && !boundRight) {
-                if (incrementAndCheckBoundReaching(offered.character)) {
-                    boundRight = true;
-                }
-            }
-
-            if (boundLeft && boundRight) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    static int[] counters(String dna) {
+    static int[] counters(int[] dna) {
         int[] counters = new int[4];
-        for (int i = 0; i < dna.length(); i++) {
-            switch (dna.charAt(i)) {
-                case 'A':
-                    counters[0]++;
-                    break;
-                case 'C':
-                    counters[1]++;
-                    break;
-                case 'T':
-                    counters[2]++;
-                    break;
-                case 'G':
-                    counters[3]++;
-                    break;
-                default:
-                    throw new RuntimeException("Input error");
-            }
+        for (int i = 0; i < dna.length; i++) {
+            counters[dna[i]]++;
         }
         return counters;
     }
-
-    enum Side {
-
-        LEFT, RIGHT
-    }
-
-    static class CharSide {
-
-        char character;
-        Side side;
-
-        public CharSide(char character, Side side) {
-            this.character = character;
-            this.side = side;
-        }
-
-    }
-
-    static class SqueezeIterator implements Iterator<CharSide> {
-
-        private final String input;
-
-        int step = 0;
-        int leftPos = 0;
-        int rightPos;
-
-        public SqueezeIterator(String input) {
-            this.input = input;
-            this.rightPos = input.length() - 1;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return step < input.length();
-        }
-
-        @Override
-        public CharSide next() {
-            if (step % 2 == 0) {
-                // left
-                char result = input.charAt(leftPos);
-                step++;
-                leftPos++;
-                return new CharSide(result, Side.LEFT);
-            } else {
-                // left
-                char result = input.charAt(rightPos);
-                step++;
-                rightPos--;
-                return new CharSide(result, Side.RIGHT);
-            }
-        }
-    }
-
 }
