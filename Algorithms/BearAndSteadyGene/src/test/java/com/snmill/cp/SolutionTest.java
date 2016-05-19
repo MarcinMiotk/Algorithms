@@ -70,6 +70,19 @@ public class SolutionTest {
     }
 
     @Test
+    public void official_8() {
+        String input = "8\n"
+                + "GTGGCCCA";
+
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Solution.main(null);
+        assertEquals("2", outContent.toString().trim());
+    }
+
+//    @Ignore
+    @Test
     public void official_4() {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/timeout");
         System.setIn(fromFile);
