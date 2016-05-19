@@ -17,32 +17,62 @@ public class Solution {
     }
 
     static int minimumMutationLength(int[] dna) {
-        int[] countersOfDnaParts = counters(dna);
-        if (isSteadyCandidate(countersOfDnaParts, dna.length)) {
+        int[] counters = buildCountersOf(dna);
+        if (!isBadDna(counters, dna.length)) {
             return 0;
         } else {
             int answer = dna.length;
 
-            // two pointers i,j
-            int j = 0;
+            int rightPointer = 0;
+            int leftPointer = 0;
 
-            for (int i = 0; i < dna.length; ++i) {
-                while (j < dna.length && !isSteadyCandidate(countersOfDnaParts, dna.length)) {
-                    --countersOfDnaParts[dna[j++]];
+            while (leftPointer < dna.length) {
+
+                while (rightPointer < dna.length && isBadDna(counters, dna.length)) {
+                    in(counters).of(dna).decrementCounterPointedBy(rightPointer);
+                    ++rightPointer;
                 }
 
-                if (isSteadyCandidate(countersOfDnaParts, dna.length)) {
-                    answer = Math.min(answer, j - i);
-                    ++countersOfDnaParts[dna[i]];
+                if (!isBadDna(counters, dna.length)) {
+                    answer = Math.min(answer, rightPointer - leftPointer);
+                    in(counters).of(dna).incrementCounterPointedBy(leftPointer);
                 }
 
+                ++leftPointer;
             }
 
             return answer;
         }
     }
 
-    static int[] counters(int[] dna) {
+    static class Builder {
+
+        private final int[] counters;
+        private int[] dna;
+
+        public Builder(int[] counters) {
+            this.counters = counters;
+        }
+
+        Builder of(int[] dna) {
+            this.dna = dna;
+            return this;
+        }
+
+        void incrementCounterPointedBy(int pointer) {
+            ++counters[dna[pointer]];
+        }
+
+        void decrementCounterPointedBy(int pointer) {
+            --counters[dna[pointer]];
+        }
+    }
+
+    static Builder in(int[] counters) {
+        return new Builder(counters);
+    }
+
+    static int[] buildCountersOf(int[] dna) {
         int[] dnaCounters = new int[MAP.length];
         for (int dnaPart : dna) {
             dnaCounters[dnaPart]++;
@@ -50,13 +80,13 @@ public class Solution {
         return dnaCounters;
     }
 
-    static boolean isSteadyCandidate(int[] dnaCounters, int dnaLength) {
+    static boolean isBadDna(int[] dnaCounters, int dnaLength) {
         for (int i = 0; i < dnaCounters.length; ++i) {
             if (dnaCounters[i] > (dnaLength / 4)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     final static char[] MAP = new char[]{'A', 'C', 'T', 'G'};
@@ -77,6 +107,4 @@ public class Solution {
         }
         throw new RuntimeException();
     }
-
-    // =================================================================
 }

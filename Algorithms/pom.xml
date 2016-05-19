@@ -52,5 +52,9 @@
         <module>Anagram</module>
         <module>PalindromeIndex</module>
         <module>GameOfThronesI</module>
+        <module>MakeItAnagram</module>
+        <module>TwoStrings</module>
+        <module>SherlockAndAnagrams</module>
+        <module>BearAndSteadyGene</module>
     </modules>
 </project>
