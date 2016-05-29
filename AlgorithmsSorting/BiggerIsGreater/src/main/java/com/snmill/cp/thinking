@@ -1,0 +1,168 @@
+Otrzymałem
+    AB
+zmieniam na ciąg int
+    64,65
+
+Chcę uzyskać leksykalnie starsze słowo minimalnym kosztem, czyli patrząc
+od prawej strony szukam takiego 
+    a[i], którego mogę zamienić z jakimś a[j<i], który ma ma wartość wyższą, czyli zachodzi
+
+    a[i]<a[j<i] i wybrać min(a[j])
+
+
+=============================
+
+
+dkhc
+    d=100
+    k=107
+    h=104
+    c=99
+
+    100,107,104,99
+
+
+    szukam wartości, która jest większa niż a[0], ale zarazem minimalna
+    znalazłem  h=104
+
+    h ...
+    104 ...
+
+    zostało do rozdania d=100, k=107, c=99
+
+    teraz szukam minimalnej wartości dla a[1]
+    mam c=99
+    
+    h,c,
+    104,99
+    zostało d=100, k=107
+
+    teraz szukam minimalnej wartości dla a[2]
+    mam d=100
+
+    i tak dalej.
+
+    aż dostanę
+
+    hcdk
+
+    104,99,100,107
+
+
+Rozwiązanie:
+============
+    0. Odwracam ciąg.
+
+    1. Szukam pierwszego  a[i], który w a[j<i] tworzy zależność a[i]<a[j<i].
+    2. Zamieniam a[i] z min(a[i..0]).
+    3. A tablicę od i-1 do 0 sortuję rosnąco.
+
+    4. Wynik to ponownie odwrócony ciąg.
+
+
+Przykład ( dkhc->hcdk )
+    dkhc -> chkd                            
+
+    0. Po odwróceniu mam 99,104,107,100
+    
+    a[0]=99 dla c
+
+    a[1]=104 dla h
+        if a[1]<a[0], 99<104, tak
+    
+    a[2]=107 dla k
+        if a[2]<a[1], 107<104, NIE
+        if a[2]<a[0], 107<99, NIE
+
+    a[3]=100 dla d
+        if a[3]<a[2], 100<107, tak
+        if a[3]<a[1], 100<104, tak
+        if a[3]<a[0], 100<99, NIE
+
+
+
+
+
+ 
+
+
+
+    d=100
+    k=107
+    h=104
+    c=99
+
+
+
+dhck                ->      dhkc
+100,104,99,107      ->      100,104,107,99
+
+
+    get [0]=107, czy na prawo jest coś > 107, nie
+    get [1]=99, czy na prawo jest coś > 99, tak, to 107
+    swap [0] i [1] mam
+
+        x,x,99,107
+    x-y podmeieniam wg. kolejnosci rosnacej, czyli 100, 104
+
+
+
+
+dkhc                ->      hcdk
+100,107,104,99      ->      104,99,100,107
+
+    get [0]=99, czy na prawo jest coś >99, nie
+    get [1]=104, czy na prawo  jest coś >104, nie
+    get [2]=107, czy na prawo jest coś >107, nie
+    get [3]=100, czy na prawo jest coś >100, TAK, to 107 lub 104, biorę MINIMUM, i mam 104 [1]
+    swap [3] i [1]
+
+        104,x,100,x
+
+    x-sy podmieniam wg. kolejności rosnąćej z pozostałych elementów
+
+
+
+                d,  k,  h, c
+        i       3,  2,  1, 0
+      a[i]    100,107,104,99
+
+      counters[99]++        ,   =1
+      counters[104]++       ,   =1                      i pamiętam MIN INDEX=1
+            szukam counters[104...MAX]>0 NIE MA
+      counters[107]++       ,   =1
+            szukam counters[107...MAX]>0 NIE MA
+      counters[100]++       ,   =1
+            szukam counters[100..MAX]>0 JEST 104
+
+            SET A[3] = 104 
+
+            counters[104]--
+      
+            
+            A[3], A[2], A[1], A[0]
+              u     _     _     _
+
+            countrs[99]=1
+            counters[100]=1
+            counters[107]=1
+
+            
+            w miejsca _ ustawiam wartości kolejne z counters  i mam
+
+            104,99,100,107
+
+
+======================================================
+
+
+babdccba         -> bac..b..
+                    bacabcd
+                   
+                    bo w miejsce kropeczek ustawiam to co mam w counters
+
+
+
+
+                       
+      
