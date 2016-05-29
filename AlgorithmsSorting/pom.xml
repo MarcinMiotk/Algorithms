@@ -10,5 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>InsertionSort</module>
+        <module>CorrectnessAndTheLoopInvariant</module>
+        <module>Quicksort</module>
+        <module>BiggerIsGreater</module>
     </modules>
 </project>
