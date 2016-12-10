@@ -3,16 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.snmill.cp</groupId>
-        <artifactId>CompetitiveProgramming</artifactId>
+        <artifactId>AlgorithmsSorting</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>AlgorithmsSorting</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>InsertionSort</module>
-        <module>CorrectnessAndTheLoopInvariant</module>
-        <module>Quicksort</module>
-        <module>BiggerIsGreater</module>
-        <module>CountingSort</module>
-    </modules>
+    <artifactId>CorrectnessAndTheLoopInvariant</artifactId>
+    <packaging>jar</packaging>
 </project>

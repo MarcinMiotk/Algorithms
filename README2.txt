@@ -2,6 +2,8 @@ Wiedza na temat algorytm�w
 
 http://www.dsalgo.com/2013/02/index.php.html
 
+http://courses.csail.mit.edu/6.006/fall11/notes.shtml
+
 http://www.mathcove.net/petersen/lessons/get-lesson?les=1
 
 http://www.tutorialspoint.com/data_structures_algorithms/index.htm
