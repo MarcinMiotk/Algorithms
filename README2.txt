@@ -1,4 +1,4 @@
-Wiedza na temat algorytm�w
+Knowledge
 
 http://www.dsalgo.com/2013/02/index.php.html
 
@@ -69,7 +69,6 @@ https://www.udacity.com/course/intro-to-algorithms--cs215
 
 
 
-WARTOŚCIOWE ROZWIĄZANIA, KTÓRE WYSŁAŁEM
 ========================================
 https://www.hackerrank.com/challenges/larrys-array/editorial
 
