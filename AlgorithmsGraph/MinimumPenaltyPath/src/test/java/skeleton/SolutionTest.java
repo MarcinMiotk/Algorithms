@@ -110,4 +110,22 @@ public class SolutionTest {
         assertEquals("379", outContent.toString().trim());
     }
 
+    @Test
+    public void testcase_05() {
+        InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_05_input");
+        System.setIn(fromFile);
+
+        Solution.main(null);
+        assertEquals("183", outContent.toString().trim());
+    }
+
+    @Test
+    public void testcase_08() {
+        InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_08_input");
+        System.setIn(fromFile);
+
+        Solution.main(null);
+        assertEquals("111", outContent.toString().trim());
+    }
+
 }
