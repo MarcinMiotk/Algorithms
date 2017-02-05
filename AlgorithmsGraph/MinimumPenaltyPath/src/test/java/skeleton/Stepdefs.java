@@ -89,6 +89,7 @@ public class Stepdefs {
         if(dijkstraStructures==null) {
             dijkstraStructures = new Solution.DijkstraStructures();
         }
+        dijkstraStructures.setDestinationToReach(destination);
         dijkstra.process(
                 sourceVertex,
                 dijkstraStructures::onVisit,
@@ -148,6 +149,13 @@ public class Stepdefs {
         dijkstraStructures = new Solution.DijkstraStructures();
         for(VertexCost cost : costsToSet) {
             dijkstraStructures.setCostByTest(cost.vertex, cost.cost);
+        }
+    }
+
+    @When("^Current Dijkstra lastKnownCosts table is$")
+    public void current_Dijkstra_lastKnownCosts_table_is(List<VertexCost> costsToSet) throws Throwable {
+        for(VertexCost cost : costsToSet) {
+            dijkstraStructures.setLastKnownCostByTest(cost.vertex, cost.cost);
         }
     }
 

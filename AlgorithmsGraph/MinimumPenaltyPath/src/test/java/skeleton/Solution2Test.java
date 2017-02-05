@@ -1,24 +1,19 @@
 package skeleton;
 
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
-/**
- *
- */
-public class SolutionTest {
+import static org.junit.Assert.assertEquals;
 
-    public SolutionTest() {
-    }
+public class Solution2Test {
+
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -47,7 +42,7 @@ public class SolutionTest {
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("3", outContent.toString().trim());
     }
 
@@ -68,7 +63,7 @@ public class SolutionTest {
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("7", outContent.toString().trim());
     }
 
@@ -77,7 +72,7 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_01_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("7", outContent.toString().trim());
     }
 
@@ -87,7 +82,7 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_02_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("95", outContent.toString().trim());
     }
 
@@ -97,7 +92,7 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_03_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("63", outContent.toString().trim());
     }
 
@@ -106,7 +101,7 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_04_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("379", outContent.toString().trim());
     }
 
@@ -115,7 +110,7 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_05_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("183", outContent.toString().trim());
     }
 
@@ -124,7 +119,7 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_08_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("111", outContent.toString().trim());
     }
 
@@ -133,7 +128,7 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_10_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("23", outContent.toString().trim());
     }
 
@@ -142,8 +137,22 @@ public class SolutionTest {
         InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_06_input");
         System.setIn(fromFile);
 
-        Solution.main(null);
+        Solution2.main(null);
         assertEquals("-1", outContent.toString().trim());
     }
 
+    @Test
+    public void noSolution() {
+        String input = "5 3\n" +
+                "1 2 3\n" +
+                "1 3 4\n" +
+                "4 5 2\n" +
+                "1 5";
+
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Solution2.main(null);
+        assertEquals("-1", outContent.toString().trim());
+    }
 }

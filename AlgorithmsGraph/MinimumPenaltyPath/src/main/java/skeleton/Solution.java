@@ -246,20 +246,32 @@ public class Solution {
             return costs.get(vertex);
         }
 
-        public boolean costAssign(int sourceVertex, int destinationVertex, int cost, BiFunction<Integer, Integer, Integer> costsAccumulation) {
+
+        private Map<Integer, Integer> lastKnownCost = new HashMap<>();
+
+        public boolean costAssign(int sourceVertex, int destinationVertex, int cost, BiFunction<Integer, Integer, Integer> costsAccumulation, BiFunction<Integer, Integer, Boolean> isBetterFirstThanSecond) {
             Integer sourceCost = costs.get(sourceVertex);
             if(sourceCost==null) {
                 sourceCost = 0;
             }
             int candidateCost = costsAccumulation.apply(sourceCost, cost);
-            int existingDestinationCost = costs.getOrDefault(destinationVertex, Integer.MAX_VALUE);
-            if(candidateCost<existingDestinationCost) {
+
+
+            Integer existingDestinationCost;
+            if(lastKnownCost.containsKey(destinationVertex)) {
+                existingDestinationCost = lastKnownCost.get(destinationVertex);
+            } else {
+                existingDestinationCost = costs.getOrDefault(destinationVertex, Integer.MAX_VALUE);
+            }
+
+            if(isBetterFirstThanSecond.apply(candidateCost, existingDestinationCost)) {
                 costs.put(destinationVertex, candidateCost);
 
+
+                lastKnownCost.put(destinationVertex, candidateCost);
                 if(destinationToReach!=null && destinationVertex==destinationToReach) {
                     lastSucceededCost = candidateCost;
                 }
-
                 return true;
             } else {
                 return false;
@@ -268,6 +280,10 @@ public class Solution {
 
         public void setCostByTest(int vertex, int cost) {
             costs.put(vertex, cost);
+        }
+
+        public void setLastKnownCostByTest(int vertex, int cost) {
+            lastKnownCost.put(vertex, cost);
         }
 
         public void setVisitedByTest(int vertex) {
@@ -369,7 +385,7 @@ public class Solution {
 
     @FunctionalInterface
     interface CostUpdating {
-        boolean assign(int sourceVertex, int destinationVertex, int cost, BiFunction<Integer, Integer, Integer> costsAccumulation);
+        boolean assign(int sourceVertex, int destinationVertex, int cost, BiFunction<Integer, Integer, Integer> costsAccumulation, BiFunction<Integer, Integer, Boolean> isBetterFirstThanSecond);
     }
 
     static class Dijkstra {
@@ -389,7 +405,7 @@ public class Solution {
                 if(edge.wasVisited()) {
                    continue;
                 }
-                if(!isParent.apply(vertex.id, edge.destination.id) && costs.assign(vertex.id, edge.destination.id, edge.cost, costsAccumulation)) {
+                if(!isParent.apply(vertex.id, edge.destination.id) && costs.assign(vertex.id, edge.destination.id, edge.cost, costsAccumulation, isFirstCostBetterThanSecond)) {
                     parent.assign(edge.destination.id, vertex.id);
                 }
                 edge.visit();
