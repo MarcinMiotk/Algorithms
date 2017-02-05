@@ -128,4 +128,13 @@ public class SolutionTest {
         assertEquals("111", outContent.toString().trim());
     }
 
+    @Test
+    public void testcase_10() {
+        InputStream fromFile = SolutionTest.class.getResourceAsStream("/testcases/testcase_10_input");
+        System.setIn(fromFile);
+
+        Solution.main(null);
+        assertEquals("23", outContent.toString().trim());
+    }
+
 }

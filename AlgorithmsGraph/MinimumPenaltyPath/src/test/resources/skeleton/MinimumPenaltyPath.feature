@@ -63,3 +63,23 @@ Feature: Minimum Penalty Path from https://www.hackerrank.com/challenges/beautif
       | 6      | 7        | 1    |
       | 5      | 7        | 1    |
     Then Minimal Penalty from 4 to 8 is 7.
+
+
+
+
+
+  Scenario:
+    Given 6 vertices
+    When Undirected edges are
+      | First  | Second   | Cost |
+      | 1      | 6        | 6    |
+      | 1      | 5        | 40   |
+      | 1      | 3        | 8    |
+      | 1      | 2        | 1    |
+      | 2      | 4        | 1    |
+      | 4      | 3        | 1    |
+      | 3      | 5        | 1    |
+      | 5      | 6        | 1    |
+      | 4      | 6        | 5    |
+
+    Then Minimal Penalty from 1 to 6 is 1.
