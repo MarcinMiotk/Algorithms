@@ -43,6 +43,13 @@ public class Stepdefs {
     }
 
 
+    @Then("^Minimal Penalty from (\\d+) to (\\d+) is not exist\\.$")
+    public void minimal_Penalty_from_to_is_not_exist(int source, int destination) throws Throwable {
+        int minimalPenalty = solution.minimumPenaltyPath(source, destination);
+        assertEquals(-1, minimalPenalty);
+    }
+
+
     Solution.Dijkstra dijkstra;
     Solution.DijkstraStructures dijkstraStructures;
 

@@ -1,10 +1,9 @@
 package skeleton;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import static java.lang.System.out;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.*;
 
@@ -59,8 +58,17 @@ public class Solution {
         Vertex first = getOrCreate(vertexFirst);
         Vertex second = getOrCreate(vertexSecond);
 
-        Edge edgeForFirst = new Edge(second, cost);
-        Edge edgeForSecond = new Edge(first, cost);
+        AtomicBoolean visitingFlag = new AtomicBoolean(false);
+        Function<Void, Void> visiting = (noMatter) -> {
+            visitingFlag.set(true);
+            return null;
+        };
+        Supplier<Boolean> visitable = () -> {
+            return visitingFlag.get();
+        };
+
+        Edge edgeForFirst = new Edge(second, cost, visiting, visitable);
+        Edge edgeForSecond = new Edge(first, cost, visiting, visitable);
 
         first.addEdge(edgeForFirst);
         second.addEdge(edgeForSecond);
@@ -117,10 +125,22 @@ public class Solution {
     static class Edge {
         Vertex destination;
         int cost;
+        private final Function<Void, Void> visiting;
+        private final Supplier<Boolean> visitable;
 
-        public Edge(Vertex destination, int cost) {
-        this.destination = destination;
-        this.cost = cost;
+        public Edge(Vertex destination, int cost, Function<Void, Void> visiting, Supplier<Boolean> visitable) {
+            this.destination = destination;
+            this.cost = cost;
+            this.visiting = visiting;
+            this.visitable = visitable;
+        }
+
+        public boolean wasVisited() {
+            return this.visitable.get();
+        }
+
+        public void visit() {
+            this.visiting.apply(null);
         }
     }
 
@@ -200,6 +220,7 @@ public class Solution {
         private final Map<Integer, Integer> parents = new HashMap<>();
         private final Map<Integer, Integer> costs = new HashMap<>();
         private List<Integer> finalPath;
+        private Integer lastSucceededCost = null;
 
         static public Boolean isFirstCostBetterThanSecond(Integer first, Integer second) {
             return first<second;
@@ -234,7 +255,11 @@ public class Solution {
             int existingDestinationCost = costs.getOrDefault(destinationVertex, Integer.MAX_VALUE);
             if(candidateCost<existingDestinationCost) {
                 costs.put(destinationVertex, candidateCost);
-                //out.println("Cost assigning "+destinationVertex+" cost "+candidateCost+" in "+sourceVertex);
+
+                if(destinationToReach!=null && destinationVertex==destinationToReach) {
+                    lastSucceededCost = candidateCost;
+                }
+
                 return true;
             } else {
                 return false;
@@ -282,7 +307,11 @@ public class Solution {
         }
 
         public Integer getFinalCost() {
-            return costs.values().iterator().next();
+            if(costs.isEmpty()) {
+                return this.lastSucceededCost;
+            } else {
+                return costs.values().iterator().next();
+            }
         }
 
         public List<Integer> getFinalPath() {
@@ -312,7 +341,7 @@ public class Solution {
         }
 
         public boolean doesPathToDestinationCanBeFound() {
-            return !costs.isEmpty();
+            return !costs.isEmpty() || lastSucceededCost!=null;
         }
 
         public Integer getBestVertexInCostsTable(BiFunction<Integer, Integer, Boolean> isFirstBetterThanSecond) {
@@ -357,9 +386,13 @@ public class Solution {
             adaptForDijkstraAlgorithm(vertex, isFirstCostBetterThanSecond);
 
             for(Edge edge : vertex.edges) {
+                if(edge.wasVisited()) {
+                   continue;
+                }
                 if(!isParent.apply(vertex.id, edge.destination.id) && costs.assign(vertex.id, edge.destination.id, edge.cost, costsAccumulation)) {
                     parent.assign(edge.destination.id, vertex.id);
                 }
+                edge.visit();
             }
             costsRemoving.accept(vertex.id);
             onVisit.accept(vertex.id);
