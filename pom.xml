@@ -9,6 +9,7 @@
         <module>Algorithms</module>
         <module>AlgorithmsSorting</module>
         <module>AlgorithmsGraph</module>
+        <module>GreedyMinimumAbsoluteDifferenceInAnArray</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
