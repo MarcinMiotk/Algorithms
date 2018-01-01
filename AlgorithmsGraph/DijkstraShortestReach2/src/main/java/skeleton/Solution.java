@@ -140,8 +140,15 @@ public class Solution {
 
         public Map<V, W> minimumPath(Iterator<UndirectedEdge<V, W>> edges, V source, Iterator<V> allVertices) {
             DijkstaCompare<W> comparator = new FirstIsShorter<>();
+
+
+            long startMetric = System.currentTimeMillis();
+
+
             Iterator<UndirectedEdge<V, W>> filteredEdges = new RemoveMultipleEdges<V,W>(comparator).filter(new RemoveLoops<V, W>().filter(edges));
             VerticesRepository<V, W> repository = new VerticesRepository<>(filteredEdges);
+
+            long processing1 = System.currentTimeMillis()-startMetric;
 
             // init structures (predecessors and distances)
             Map<V, DijkstraStructure<V,W>> structures = new HashMap();
@@ -160,13 +167,21 @@ public class Solution {
             });
 */
 
+            long processing2 = System.currentTimeMillis()-startMetric;
 
             // init source
             structures.get(source).cumulatedDistance = zero.get();
             DijkstraCalculationSteps<V, W> calculations = new DijkstraCalculationSteps(structures);
 
+
+            long processing3 = System.currentTimeMillis()-startMetric;
+
+
             while(calculations.canDoNextStep()) {
                 Vertex<V,W> u = repository.get(calculations.getMinimal(comparator));
+
+                long startSecondMetric = System.currentTimeMillis();
+
                 u.forEachAdjacent((adjacence) -> {
                     DijkstraStructure<V,W> neighbour = structures.get(adjacence.destination);
                     DijkstraStructure<V,W> me = structures.get(u.id);
@@ -183,6 +198,9 @@ public class Solution {
                     }
 
                 });
+
+                long processingSecond = System.currentTimeMillis()-startSecondMetric;
+                long processingSecond2 = System.currentTimeMillis()-startSecondMetric;
             }
 
 
@@ -205,9 +223,16 @@ public class Solution {
                 }
             }
 
-            PriorityQueue<Item<V,W>> queue = new PriorityQueue<>((vwItem, t1) -> {
-                    return ((Long)vwItem.weight).compareTo((Long)t1.weight);
-                });
+//            PriorityQueue<Item<V,W>> queue = new PriorityQueue<>((vwItem, t1) -> {
+//                    return ((Long)vwItem.weight).compareTo((Long)t1.weight);
+ //               });
+
+            PriorityQueue<Item<V,W>> queue = new PriorityQueue<>(new Comparator<Item<V, W>>() {
+                @Override
+                public int compare(Item<V, W> vwItem, Item<V, W> t1) {
+                    return (int)((Long)vwItem.weight-(Long)t1.weight);
+                }
+            });
 
             DijkstraCalculationSteps(Map<V, DijkstraStructure<V,W>> structures) {
                 for(V v : structures.keySet()) {
